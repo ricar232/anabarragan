@@ -8,7 +8,7 @@ try {
     // Configuración de la conexión
     $host = 'localhost';
     $port = 3306; // Cambiar si usas otro puerto
-    $dbname = 'login_system';
+    $dbname = 'segurosanabarragan';
     $username = 'ana';
     $password = 'ana*123';
 
