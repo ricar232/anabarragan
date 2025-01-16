@@ -6,17 +6,18 @@ if (!isset($_SESSION['user'])) {
 }
 
 // Conexión a la base de datos
-require_once 'php/conexion.php'; // Mueve la conexión a un archivo separado
+$host = 'localhost';
+$port = 3316; // Cambia el puerto según tu configuración
+$user = 'root';
+$password = 'Aa*1234567*';
+$dbname = 'login_system';
 
-// Obtener datos del dashboard
-$sql_users = "SELECT COUNT(*) AS user_count FROM registered_users";
-$sql_appointments = "SELECT COUNT(*) AS appointment_count FROM appointments";
-
-$user_count = $conn->query($sql_users)->fetch_assoc()['user_count'] ?? 0;
-$appointment_count = $conn->query($sql_appointments)->fetch_assoc()['appointment_count'] ?? 0;
-
-$conn->close();
+$conn = new mysqli($host, $user, $password, $dbname, $port);
+if ($conn->connect_error) {
+    die('Conexión fallida: ' . $conn->connect_error);
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,75 +25,29 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="css/dashboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="dashboard-container">
-        <!-- Encabezado -->
+    <div class="container">
         <header>
             <h1>Bienvenido, <span><?php echo htmlspecialchars($_SESSION['user']); ?></span>!</h1>
-            <a href="php/logout.php" class="logout-btn">Cerrar Sesión</a>
+            <a href="logout.php" class="logout-btn">Cerrar Sesión</a>
         </header>
+        
+        <section>
+            <h2>Registrar Usuario</h2>
+            <form action="handle_register_user.php" method="POST">
+                <label for="username">Usuario:</label>
+                <input type="text" id="username" name="username" required>
 
-        <!-- Sección de estadísticas -->
-        <section class="stats">
-            <div class="card">
-                <i class="fas fa-users"></i>
-                <div>
-                    <h3>Usuarios Registrados</h3>
-                    <p><?php echo $user_count; ?></p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="fas fa-calendar-alt"></i>
-                <div>
-                    <h3>Citas Médicas</h3>
-                    <p><?php echo $appointment_count; ?></p>
-                </div>
-            </div>
-        </section>
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
 
-        <!-- Gráficos -->
-        <section class="charts">
-            <canvas id="userChart"></canvas>
-            <canvas id="appointmentChart"></canvas>
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+
+                <button type="submit">Registrar</button>
+            </form>
         </section>
     </div>
-
-    <script>
-        const userData = [<?php echo implode(',', range(1, $user_count)); ?>];
-        const appointmentData = [<?php echo implode(',', range(1, $appointment_count)); ?>];
-
-        // Configurar gráfico de usuarios
-        new Chart(document.getElementById('userChart'), {
-            type: 'line',
-            data: {
-                labels: ['Enero', 'Febrero', 'Marzo'],
-                datasets: [{
-                    label: 'Usuarios Registrados',
-                    data: userData,
-                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    tension: 0.3,
-                }]
-            }
-        });
-
-        // Configurar gráfico de citas
-        new Chart(document.getElementById('appointmentChart'), {
-            type: 'bar',
-            data: {
-                labels: ['Enero', 'Febrero', 'Marzo'],
-                datasets: [{
-                    label: 'Citas Médicas',
-                    data: appointmentData,
-                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                }]
-            }
-        });
-    </script>
 </body>
 </html>
