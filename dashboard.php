@@ -1,20 +1,11 @@
 <?php
+// Iniciar sesión
 session_start();
+
+// Verificar si el usuario está autenticado
 if (!isset($_SESSION['user'])) {
-    header('Location: index.php');
+    header('Location: php/login.php'); // Redirigir al login si no hay sesión
     exit();
-}
-
-// Conexión a la base de datos
-$host = 'localhost';
-$port = 3316; // Cambia el puerto según tu configuración
-$user = 'ana';
-$password = 'ana*123';
-$dbname = 'login_system';
-
-$conn = new mysqli($host, $user, $password, $dbname, $port);
-if ($conn->connect_error) {
-    die('Conexión fallida: ' . $conn->connect_error);
 }
 ?>
 
@@ -24,30 +15,46 @@ if ($conn->connect_error) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .dashboard-container {
+            text-align: center;
+            background: white;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .logout-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .logout-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Bienvenido, <span><?php echo htmlspecialchars($_SESSION['user']); ?></span>!</h1>
-            <a href="logout.php" class="logout-btn">Cerrar Sesión</a>
-        </header>
-        
-        <section>
-            <h2>Registrar Usuario</h2>
-            <form action="handle_register_user.php" method="POST">
-                <label for="username">Usuario:</label>
-                <input type="text" id="username" name="username" required>
-
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
-
-                <label for="email">Correo Electrónico:</label>
-                <input type="email" id="email" name="email" required>
-
-                <button type="submit">Registrar</button>
-            </form>
-        </section>
+    <div class="dashboard-container">
+        <h1>Bienvenido, <?php echo htmlspecialchars($_SESSION['user']); ?>!</h1>
+        <a href="php/logout.php" class="logout-btn">Cerrar Sesión</a>
     </div>
 </body>
 </html>
