@@ -9,7 +9,7 @@ try {
     $host = 'localhost';
     $port = 3306; // Cambiar si usas otro puerto
     $dbname = 'segurosanabarragan';
-    $username = 'ana';
+    $username = 'Ana';
     $password = 'ana*123';
 
     // Crear conexión PDO
