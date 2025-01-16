@@ -11,12 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = trim($_POST['password']);
 
     try {
-        $stmt = $conn->prepare("SELECT * FROM system_users WHERE username = ? AND password = ?");
-        $stmt->bind_param('ss', $username, $password);
+        // Consulta segura utilizando placeholders
+        $stmt = $conn->prepare("SELECT * FROM system_users WHERE username = :username AND password = :password");
+        $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+        $stmt->bindValue(':password', $password, PDO::PARAM_STR);
         $stmt->execute();
-        $result = $stmt->get_result();
 
-        if ($result->num_rows === 1) {
+        if ($stmt->rowCount() === 1) {
             $_SESSION['user'] = $username;
             header('Location: ../dashboard.php'); // Redirección al dashboard
             exit();
@@ -25,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "<script>window.location.href = '../index.php';</script>";
             exit();
         }
-    } catch (Exception $e) {
+    } catch (PDOException $e) {
         die("Error: " . $e->getMessage());
     }
 } else {
