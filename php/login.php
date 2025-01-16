@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($result->num_rows === 1) {
             $_SESSION['user'] = $username;
-            header('Location: dashboard.php');
+            header('Location: ../dashboard.php');
             exit(); // Asegúrate de que este exit esté aquí para detener el script
         } else {
             echo "<script>alert('Usuario o contraseña incorrectos');</script>";
