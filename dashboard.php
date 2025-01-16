@@ -8,8 +8,8 @@ if (!isset($_SESSION['user'])) {
 // Conexión a la base de datos
 $host = 'localhost';
 $port = 3316; // Cambia el puerto según tu configuración
-$user = 'root';
-$password = 'Aa*1234567*';
+$user = 'ana';
+$password = 'ana*123';
 $dbname = 'login_system';
 
 $conn = new mysqli($host, $user, $password, $dbname, $port);
