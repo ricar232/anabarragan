@@ -11,7 +11,7 @@
     <div class="login-container">
         <div class="login-form">
             <h2>Inicia Sesión</h2>
-            <form action="php/login.php" method="POST">
+            <form action="../php/login.php" method="POST">
                 <div class="input-container">
                     <i class="fas fa-user"></i>
                     <input type="text" name="username" placeholder="Usuario" required>
