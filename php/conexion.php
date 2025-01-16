@@ -10,7 +10,7 @@ try {
     $port = 3306; // Cambiar si usas otro puerto
     $dbname = 'login_system';
     $username = 'ana';
-    $password = 'a*123';
+    $password = 'Ana*123';
 
     // Crear conexión PDO
     $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8";
