@@ -1,31 +1,29 @@
 <?php
-include '../php/conexion.php';
+session_start();
+include 'conexion.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     try {
-        $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username AND password = :password");
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+        // Consulta para obtener el usuario
+        $stmt = $conn->prepare("SELECT * FROM system_users WHERE username = ? AND password = ?");
+        $stmt->bind_param('ss', $username, $password);
         $stmt->execute();
+        $result = $stmt->get_result();
 
-        if ($stmt->rowCount() > 0) {
-            session_start();
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            $_SESSION['user'] = $user['username']; // Guarda el usuario en la sesión
-            header("Location: ../dashboard.php");
+        if ($result->num_rows === 1) {
+            $_SESSION['user'] = $username;
+            header('Location: dashboard.php');
             exit();
         } else {
             echo "<script>alert('Usuario o contraseña incorrectos');</script>";
-            echo "<script>window.location.href='../index.php';</script>";
         }
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+    } catch (Exception $e) {
+        die("Error: " . $e->getMessage());
     }
 } else {
-    echo "<script>alert('Método de solicitud no válido');</script>";
-    echo "<script>window.location.href='../index.php';</script>";
+    echo "<script>alert('Acceso no autorizado');</script>";
 }
 ?>
