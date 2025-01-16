@@ -1,10 +1,9 @@
 <?php
-// Iniciar sesión
 session_start();
 
-// Verificar si el usuario está autenticado
+// Verifica si el usuario ha iniciado sesión
 if (!isset($_SESSION['user'])) {
-    header('Location: php/login.php'); // Redirigir al login si no hay sesión
+    header('Location: php/login.php');
     exit();
 }
 ?>
@@ -18,43 +17,45 @@ if (!isset($_SESSION['user'])) {
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
         }
-        .dashboard-container {
+        .container {
             text-align: center;
             background: white;
-            padding: 20px 40px;
+            padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        h1 {
+        .welcome {
+            font-size: 24px;
             margin-bottom: 20px;
-            color: #333;
         }
-        .logout-btn {
+        .logout {
             display: inline-block;
             padding: 10px 20px;
+            background: #007bff;
             color: white;
-            background-color: #007bff;
             text-decoration: none;
             border-radius: 5px;
-            font-weight: bold;
+            font-size: 16px;
+            transition: background 0.3s;
         }
-        .logout-btn:hover {
-            background-color: #0056b3;
+        .logout:hover {
+            background: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <h1>Bienvenido, <?php echo htmlspecialchars($_SESSION['user']); ?>!</h1>
-        <a href="php/logout.php" class="logout-btn">Cerrar Sesión</a>
+    <div class="container">
+        <div class="welcome">
+            Bienvenido, <strong><?php echo htmlspecialchars($_SESSION['user']); ?></strong>!
+        </div>
+        <a href="php/logout.php" class="logout">Cerrar Sesión</a>
     </div>
 </body>
 </html>
