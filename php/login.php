@@ -1,13 +1,13 @@
 <?php
 session_start();
-//include 'conexion.php';
+include 'conexion.php'; // Asegúrate de que este archivo tenga la conexión correcta
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
     try {
-        // Consulta para obtener el usuario
+        // Consulta para verificar el usuario y la contraseña
         $stmt = $conn->prepare("SELECT * FROM system_users WHERE username = ? AND password = ?");
         $stmt->bind_param('ss', $username, $password);
         $stmt->execute();
@@ -15,17 +15,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($result->num_rows === 1) {
             $_SESSION['user'] = $username;
-            header('Location: ../dashboard.php');
-            exit(); // Asegúrate de que este exit esté aquí para detener el script
+
+            // Redirigir al dashboard
+            header('Location: ../dashboard.php'); // Ruta ajustada
+            exit();
         } else {
-            echo "<script>alert('Usuario o contraseña incorrectos');</script>";
-            echo "<script>window.location.href='index.php';</script>";
+            // Usuario o contraseña incorrectos
+            echo "<script>
+                    alert('Usuario o contraseña incorrectos');
+                    window.location.href = '../index.php';
+                  </script>";
         }
     } catch (Exception $e) {
+        // Mostrar error si ocurre algo
         die("Error: " . $e->getMessage());
     }
 } else {
-    echo "<script>alert('Acceso no autorizado');</script>";
-    echo "<script>window.location.href='index.php';</script>";
+    echo "<script>
+            alert('Acceso no autorizado');
+            window.location.href = '../index.php';
+          </script>";
 }
 ?>
