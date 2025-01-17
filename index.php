@@ -8,22 +8,21 @@
 </head>
 <body>
     <div class="login-container">
-        <h1>Bienvenido</h1>
-        <p>Por favor, inicia sesión para continuar</p>
-
-        <!-- Mostrar mensaje de error si existe -->
-        <?php if (isset($_GET['error']) && htmlspecialchars($_GET['error']) == 1): ?>
-            <p class="error-message">Usuario o contraseña incorrectos. Inténtalo de nuevo.</p>
+        <h1>Iniciar Sesión</h1>
+        
+        <!-- Mostrar mensaje de error -->
+        <?php if (isset($_GET['error']) && $_GET['error'] == 1): ?>
+            <p class="error-message">Usuario o contraseña incorrectos.</p>
         <?php endif; ?>
 
         <form action="validar_login.php" method="POST">
             <label for="usuario">Usuario:</label>
-            <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario" required autofocus>
-
+            <input type="text" name="usuario" id="usuario" required>
+            
             <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
-
-            <button type="submit">Ingresar</button>
+            <input type="password" name="password" id="password" required>
+            
+            <button type="submit">Iniciar Sesión</button>
         </form>
     </div>
 </body>
