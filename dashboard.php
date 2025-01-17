@@ -16,11 +16,11 @@
                 <span>Admin Panel</span>
             </div>
             <ul>
-                <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="dashboard.php"><i class="fas fa-home"></i> Inicio</a></li>
                 <li><a href="agregar_usuario.php"><i class="fas fa-user-plus"></i> Agregar Usuarios</a></li>
                 <li><a href="lista_usuarios.php"><i class="fas fa-users"></i> Listar Usuarios</a></li>
                 <li><a href="#"><i class="fas fa-cogs"></i> Configuración</a></li>
-                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
             </ul>
         </aside>
         <main class="main-content">
@@ -45,7 +45,7 @@
     <script>
         const ctx = document.getElementById('userChart').getContext('2d');
         const userChart = new Chart(ctx, {
-            type: 'bar', // Cambiado a bar para mejor diseño
+            type: 'bar',
             data: {
                 labels: ['Plan A', 'Plan B', 'Plan C'],
                 datasets: [{
