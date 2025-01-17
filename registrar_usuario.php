@@ -19,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $plan_medico = $_POST['plan_medico'];
 
     try {
-        // Preparar la consulta SQL
-        $sql = "INSERT INTO usuarios (nombre, fecha_nacimiento, direccion, telefono, correo, seguro_social, medicare, medicaid, dr_primario, id_pcp, npi, plan_medico)
+        // Preparar la consulta SQL para insertar datos
+        $sql = "INSERT INTO usuarios_registrados (nombre, fecha_nacimiento, direccion, telefono, correo, seguro_social, medicare, medicaid, dr_primario, id_pcp, npi, plan_medico)
                 VALUES (:nombre, :fecha_nacimiento, :direccion, :telefono, :correo, :seguro_social, :medicare, :medicaid, :dr_primario, :id_pcp, :npi, :plan_medico)";
 
         $stmt = $conn->prepare($sql);
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Ejecutar la consulta
         $stmt->execute();
 
-        // Redirigir al Dashboard con un mensaje de éxito
+        // Redirigir al formulario con un mensaje de éxito
         header('Location: agregar_usuario.php?success=1');
         exit();
     } catch (PDOException $e) {
