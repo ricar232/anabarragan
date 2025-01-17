@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 require 'conexion.php';
 
 // Verificar que los datos del formulario se reciban correctamente
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener datos del formulario
     $usuario = trim($_POST['usuario']); // Eliminar espacios en blanco adicionales
     $password = trim($_POST['password']);
@@ -23,9 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($resultado) {
-            // Verificar la contraseña (en caso de que esté encriptada, usa password_verify)
-            if ($password === $resultado['contrasena']) {
+            // Verificar la contraseña (utilizando password_verify si está encriptada)
+            if (password_verify($password, $resultado['contrasena'])) {
                 // Inicio de sesión exitoso: Redirigir al dashboard o página principal
+                session_start(); // Iniciar sesión
+                $_SESSION['usuario'] = $resultado['usuario']; // Guardar datos del usuario en la sesión
                 header("Location: dashboard.php");
                 exit(); // Detener la ejecución después de redirigir
             } else {
@@ -40,7 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     } catch (PDOException $e) {
         // Manejar errores de base de datos
-        echo "Error: " . $e->getMessage();
+        error_log("Error en la base de datos: " . $e->getMessage()); // Registrar el error en el log del servidor
+        header("Location: index.php?error=2"); // Error genérico en la base de datos
+        exit();
     }
 } else {
     // Si el acceso no es por POST, redirigir al formulario de login

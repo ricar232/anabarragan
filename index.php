@@ -12,13 +12,13 @@
         <p>Por favor, inicia sesión para continuar</p>
 
         <!-- Mostrar mensaje de error si existe -->
-        <?php if (isset($_GET['error']) && $_GET['error'] == 1): ?>
+        <?php if (isset($_GET['error']) && htmlspecialchars($_GET['error']) == 1): ?>
             <p class="error-message">Usuario o contraseña incorrectos. Inténtalo de nuevo.</p>
         <?php endif; ?>
 
         <form action="validar_login.php" method="POST">
             <label for="usuario">Usuario:</label>
-            <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario" required>
+            <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario" required autofocus>
 
             <label for="password">Contraseña:</label>
             <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
