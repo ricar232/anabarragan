@@ -25,21 +25,60 @@
         <!-- Contenido principal -->
         <main class="main-content">
             <header class="main-header">
-                <h1>Panel de Control</h1>
+                <h1>Registrar Usuario</h1>
             </header>
-            <section class="dashboard-cards">
-                <div class="card">
-                    <h3>Usuarios registrados</h3>
-                    <p>150</p>
-                </div>
-                <div class="card">
-                    <h3>Proyectos activos</h3>
-                    <p>10</p>
-                </div>
-                <div class="card">
-                    <h3>Notificaciones</h3>
-                    <p>3 nuevas</p>
-                </div>
+            <section class="register-form">
+                <form action="registrar_usuario.php" method="POST">
+                    <div class="form-group">
+                        <label for="nombre">Nombre y Apellidos</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre y apellidos" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" id="direccion" name="direccion" placeholder="Dirección" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Número de Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="correo">Correo Electrónico</label>
+                        <input type="email" id="correo" name="correo" placeholder="Correo electrónico" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="seguro_social">Seguro Social</label>
+                        <input type="text" id="seguro_social" name="seguro_social" placeholder="Seguro Social" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="medicare">Medicare</label>
+                        <input type="text" id="medicare" name="medicare" placeholder="Medicare">
+                    </div>
+                    <div class="form-group">
+                        <label for="medicaid">Medicaid</label>
+                        <input type="text" id="medicaid" name="medicaid" placeholder="Medicaid">
+                    </div>
+                    <div class="form-group">
+                        <label for="dr_primario">Nombre del Dr. Primario</label>
+                        <input type="text" id="dr_primario" name="dr_primario" placeholder="Dr. Primario">
+                    </div>
+                    <div class="form-group">
+                        <label for="id_pcp">ID PCP</label>
+                        <input type="text" id="id_pcp" name="id_pcp" placeholder="ID PCP">
+                    </div>
+                    <div class="form-group">
+                        <label for="npi">NPI</label>
+                        <input type="text" id="npi" name="npi" placeholder="NPI">
+                    </div>
+                    <div class="form-group">
+                        <label for="plan_medico">Plan Médico</label>
+                        <input type="text" id="plan_medico" name="plan_medico" placeholder="Plan Médico">
+                    </div>
+                    <button type="submit" class="btn-submit">Registrar Usuario</button>
+                </form>
             </section>
         </main>
     </div>
