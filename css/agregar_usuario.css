@@ -1,14 +1,36 @@
-/* Fondo general con degradado */
+/* Fondo general con imagen */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to right, #6a11cb, #2575fc);
+    background: url('../img/background.jpg') no-repeat center center fixed;
+    background-size: cover;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #fff;
+}
+
+/* Botón de regreso al Dashboard */
+.btn-back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #4a90e2;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s ease;
+}
+
+.btn-back:hover {
+    background: #357ab8;
 }
 
 /* Formulario */

@@ -9,6 +9,9 @@
 </head>
 <body>
     <div class="dashboard-container">
+        <!-- Botón para regresar al dashboard -->
+        <a href="dashboard.php" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Dashboard</a>
+        
         <!-- Contenido principal -->
         <main class="main-content">
             <section class="register-form">
