@@ -12,10 +12,10 @@ body {
 .container {
     max-width: 90%;
     margin: 3rem auto;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(0, 0, 0, 0.281);
     border-radius: 15px;
     padding: 3rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 20px rgb(0, 0, 0);
     backdrop-filter: blur(10px);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
