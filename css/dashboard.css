@@ -1,68 +1,131 @@
-/* Estilos generales ya existentes aquí */
-
-/* Formulario de registro */
-.register-form {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-}
-
-.register-form form {
-    display: grid;
-    gap: 15px;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-
-.form-group {
+/* Configuración general */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
     display: flex;
-    flex-direction: column;
-}
-
-.form-group label {
-    font-weight: bold;
-    margin-bottom: 5px;
+    height: 100vh;
+    background: #f4f6f9; /* Fondo gris claro */
     color: #333;
 }
 
-.form-group input {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
+/* Contenedor principal */
+.dashboard-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
 }
 
-.form-group input:focus {
-    border-color: #4a90e2;
-    outline: none;
-}
-
-.btn-submit {
-    background: #4a90e2;
+/* Menú lateral */
+.sidebar {
+    width: 250px;
+    background: #4a90e2; /* Azul moderno */
     color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    grid-column: span 2;
-    transition: background 0.3s ease, transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    height: 100%;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease;
 }
 
-.btn-submit:hover {
-    background: #357ab8;
-    transform: scale(1.05);
+.sidebar-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Responsivo */
+.sidebar-header h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    word-break: break-word;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #fff;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-menu a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+.sidebar-menu a.active {
+    background: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.sidebar-menu a i {
+    margin-right: 10px;
+}
+
+/* Contenido principal */
+.main-content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    padding: 20px;
+    background: #f4f6f9;
+    overflow-y: auto;
+    transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+.main-header {
+    background: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+/* Efectos responsivos */
 @media (max-width: 768px) {
-    .register-form form {
-        grid-template-columns: 1fr;
+    .sidebar {
+        width: 200px;
     }
 
-    .btn-submit {
-        grid-column: span 1;
+    .main-content {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 100px;
+    }
+
+    .main-content {
+        margin-left: 100px;
+        width: calc(100% - 100px);
+    }
+
+    .sidebar-menu a {
+        font-size: 0.8rem;
+    }
+
+    .sidebar-menu a i {
+        font-size: 1rem;
     }
 }
