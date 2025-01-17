@@ -3,37 +3,25 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
+    width: 100%;
     font-family: 'Poppins', sans-serif; /* Tipografía moderna */
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to bottom, rgba(74, 144, 226, 0.8), rgba(20, 93, 160, 0.8));
     overflow: hidden;
-}
-
-/* Fondo con efecto de desenfoque */
-.background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     background: url('../img/fondo.jpg') no-repeat center center/cover;
-    filter: blur(15px);
-    z-index: -1;
 }
 
 /* Contenedor del login */
 .login-container {
-    background: rgba(255, 255, 255, 0.2); /* Transparencia */
-    backdrop-filter: blur(10px); /* Desenfoque */
+    background: rgba(255, 255, 255, 0.15); /* Transparencia */
+    backdrop-filter: blur(20px); /* Desenfoque */
     padding: 2rem;
     border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     text-align: center;
-    width: 90%;
     max-width: 400px;
-    color: #fff;
+    width: 90%;
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -68,7 +56,7 @@ input {
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 5px;
     font-size: 1rem;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.2);
     color: #fff;
     transition: border-color 0.3s ease;
 }
