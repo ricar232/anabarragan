@@ -1,3 +1,7 @@
+<?php
+// Verificar si hay un mensaje en la URL
+$mensaje = isset($_GET['mensaje']) ? $_GET['mensaje'] : '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +14,19 @@
 <body>
     <div class="container">
         <h1 class="title"><i class="fas fa-user-plus"></i> Registrar Usuario</h1>
+
+        <!-- Mostrar mensajes de éxito o error -->
+        <?php if ($mensaje === 'exito'): ?>
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i> ¡Usuario registrado exitosamente!
+            </div>
+        <?php elseif ($mensaje === 'error'): ?>
+            <div class="alert alert-danger">
+                <i class="fas fa-times-circle"></i> Ocurrió un error al registrar el usuario. Por favor, inténtelo de nuevo.
+            </div>
+        <?php endif; ?>
+
+        <!-- Formulario -->
         <form class="form-container" action="registrar_usuario.php" method="POST">
             <div class="form-group">
                 <label for="nombre">Nombre y Apellidos</label>
@@ -63,5 +80,27 @@
         </form>
         <a href="dashboard.php" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Dashboard</a>
     </div>
+
+    <style>
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
 </body>
 </html>

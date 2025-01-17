@@ -20,10 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     try {
         // Preparar la consulta SQL para insertar datos
-        $sql = "INSERT INTO usuarios_registrados (nombre, fecha_nacimiento, direccion, telefono, correo, seguro_social, medicare, medicaid, dr_primario, id_pcp, npi, plan_medico)
-                VALUES (:nombre, :fecha_nacimiento, :direccion, :telefono, :correo, :seguro_social, :medicare, :medicaid, :dr_primario, :id_pcp, :npi, :plan_medico)";
+        $sql = "INSERT INTO usuarios_registrados 
+                (nombre, fecha_nacimiento, direccion, telefono, correo, seguro_social, medicare, medicaid, dr_primario, id_pcp, npi, plan_medico)
+                VALUES 
+                (:nombre, :fecha_nacimiento, :direccion, :telefono, :correo, :seguro_social, :medicare, :medicaid, :dr_primario, :id_pcp, :npi, :plan_medico)";
 
         $stmt = $conn->prepare($sql);
+
+        // Asignar parámetros a la consulta
         $stmt->bindParam(':nombre', $nombre);
         $stmt->bindParam(':fecha_nacimiento', $fecha_nacimiento);
         $stmt->bindParam(':direccion', $direccion);
@@ -40,12 +44,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Ejecutar la consulta
         $stmt->execute();
 
-        // Redirigir al formulario con un mensaje de éxito
-        header('Location: agregar_usuario.php?success=1');
+        // Redirigir con mensaje de éxito
+        header('Location: agregar_usuario.php?mensaje=exito');
         exit();
     } catch (PDOException $e) {
-        // Mostrar error si algo falla
-        echo "Error al registrar el usuario: " . $e->getMessage();
+        // Redirigir con mensaje de error
+        header('Location: agregar_usuario.php?mensaje=error');
+        exit();
     }
 } else {
     // Redirigir al formulario si se intenta acceder directamente
