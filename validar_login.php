@@ -7,14 +7,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = trim($_POST['password']);
 
     try {
+        // Consulta para buscar al usuario
         $sql = "SELECT * FROM usuarios WHERE usuario = :usuario";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':usuario', $usuario);
         $stmt->execute();
 
-        $resultado = $stmt->fetch();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($resultado && password_verify($password, $resultado['contrasena'])) {
+        if ($resultado && $password === $resultado['contrasena']) { // Comparación sin encriptar
             $_SESSION['usuario'] = $resultado['usuario'];
             header("Location: dashboard.php");
             exit();
