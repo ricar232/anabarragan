@@ -6,29 +6,30 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="css/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="dashboard-container">
         <aside class="sidebar">
-            <h2>Bienvenido,</h2>
+            <h2><i class="fas fa-user-circle"></i> Bienvenido</h2>
             <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="agregar_usuario.php">Agregar Usuarios</a></li>
-                <li><a href="lista_usuarios.php">Listar Usuarios</a></li>
-                <li><a href="#">Configuración</a></li>
-                <li><a href="#">Cerrar sesión</a></li>
+                <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="agregar_usuario.php"><i class="fas fa-user-plus"></i> Agregar Usuarios</a></li>
+                <li><a href="lista_usuarios.php"><i class="fas fa-users"></i> Listar Usuarios</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Configuración</a></li>
+                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
             </ul>
         </aside>
         <main class="main-content">
-            <h1>Panel de Control</h1>
+            <h1><i class="fas fa-chart-pie"></i> Panel de Control</h1>
             <p>Información general de los usuarios registrados.</p>
             <div class="cards-container">
                 <div class="card">
-                    <h2>Total de Usuarios</h2>
+                    <h2><i class="fas fa-users"></i> Total de Usuarios</h2>
                     <p>150</p>
                 </div>
                 <div class="card">
-                    <h2>Planes Registrados</h2>
+                    <h2><i class="fas fa-file-medical"></i> Planes Registrados</h2>
                     <p>Plan A, B, C</p>
                 </div>
             </div>
@@ -41,7 +42,7 @@
     <script>
         const ctx = document.getElementById('userChart').getContext('2d');
         const userChart = new Chart(ctx, {
-            type: 'bar', // Cambiamos a gráfica de barras
+            type: 'doughnut', // Gráfica de dona moderna
             data: {
                 labels: ['Plan A', 'Plan B', 'Plan C'],
                 datasets: [{
@@ -57,7 +58,7 @@
                         'rgba(54, 162, 235, 1)',
                         'rgba(255, 206, 86, 1)'
                     ],
-                    borderWidth: 1
+                    borderWidth: 2
                 }]
             },
             options: {
@@ -71,11 +72,6 @@
                         enabled: true,
                         mode: 'index',
                         intersect: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
                     }
                 }
             }
