@@ -18,6 +18,7 @@
                 <li><a href="dashboard.php"><i class="fas fa-home"></i> Inicio</a></li>
                 <li><a href="agregar_usuario.php"><i class="fas fa-user-plus"></i> Agregar Usuarios</a></li>
                 <li><a href="#"><i class="fas fa-users"></i> Listar Usuarios</a></li>
+                <li><a href="lista_usuarios.php">Listar Usuarios</a></li>
                 <li><a href="#"><i class="fas fa-cogs"></i> Configuración</a></li>
                 <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
             </ul>
