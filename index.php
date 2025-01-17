@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="css/login.css"> <!-- Estilos específicos para el login -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Iconos modernos -->
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="background"></div>
     <div class="login-container">
         <h1><i class="fas fa-user-circle"></i> Iniciar Sesión</h1>
 
-        <!-- Mostrar mensaje de error solo si existe el parámetro 'error' -->
         <?php if (isset($_GET['error']) && $_GET['error'] == 1): ?>
             <p class="error-message"><i class="fas fa-exclamation-triangle"></i> Usuario o contraseña incorrectos.</p>
         <?php endif; ?>
