@@ -9,26 +9,10 @@
 </head>
 <body>
     <div class="dashboard-container">
-        <!-- Menú lateral -->
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <h2><i class="fas fa-user-circle"></i> Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario']); ?></h2>
-            </div>
-            <ul class="sidebar-menu">
-                <li><a href="dashboard.php"><i class="fas fa-home"></i> Inicio</a></li>
-                <li><a href="agregar_usuario.php" class="active"><i class="fas fa-user-plus"></i> Agregar Usuarios</a></li>
-                <li><a href="#"><i class="fas fa-users"></i> Listar Usuarios</a></li>
-                <li><a href="#"><i class="fas fa-cogs"></i> Configuración</a></li>
-                <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
-            </ul>
-        </nav>
-
         <!-- Contenido principal -->
         <main class="main-content">
-            <header class="main-header">
-                <h1>Registrar Usuario</h1>
-            </header>
             <section class="register-form">
+                <h1>Registrar Usuario</h1>
                 <form action="registrar_usuario.php" method="POST">
                     <div class="form-group">
                         <label for="nombre"><i class="fas fa-user"></i> Nombre y Apellidos</label>
