@@ -1,87 +1,80 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: url('../images/background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #fff;
+    background: linear-gradient(to bottom, #6a11cb, #2575fc);
+    color: #333;
 }
 
 .container {
     max-width: 1200px;
     margin: 40px auto;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
     padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    animation: fadeIn 1s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    text-align: center;
 }
 
 h1 {
-    text-align: center;
+    font-size: 2rem;
     margin-bottom: 20px;
-    color: #333;
+    color: #444;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-bottom: 20px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
 }
 
 table th, table td {
     padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+    text-align: center;
+    border: 1px solid #ddd;
 }
 
 table th {
-    background: linear-gradient(45deg, #4facfe, #00f2fe);
+    background: linear-gradient(to right, #4facfe, #00f2fe);
     color: #fff;
+    font-weight: bold;
 }
 
 table tr:nth-child(even) {
-    background: rgba(0, 0, 0, 0.05);
+    background: #f9f9f9;
 }
 
 table tr:hover {
-    background: rgba(0, 0, 0, 0.1);
+    background: #f1f1f1;
 }
 
-.edit-button, .delete-button {
+.action-button {
     text-decoration: none;
-    padding: 8px;
-    border-radius: 50%;
+    padding: 5px 10px;
+    border-radius: 5px;
     color: #fff;
-    margin-right: 10px;
+    margin: 0 5px;
     display: inline-block;
     transition: background 0.3s;
 }
 
-.edit-button {
+.action-button.edit {
     background: #4caf50;
 }
 
-.edit-button:hover {
+.action-button.edit:hover {
     background: #45a049;
 }
 
-.delete-button {
+.action-button.delete {
     background: #f44336;
 }
 
-.delete-button:hover {
+.action-button.delete:hover {
     background: #d32f2f;
 }
 
@@ -92,7 +85,6 @@ table tr:hover {
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
-    text-align: center;
     transition: background 0.3s;
 }
 
