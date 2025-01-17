@@ -1,63 +1,140 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="css/dashboard.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <div class="sidebar">
-        <h2>Bienvenido,</h2>
-        <ul>
-            <li><i class="fas fa-home"></i> <a href="#">Inicio</a></li>
-            <li><i class="fas fa-user-plus"></i> <a href="agregar_usuario.php">Agregar Usuarios</a></li>
-            <li><i class="fas fa-users"></i> <a href="lista_usuarios.php">Listar Usuarios</a></li>
-            <li><i class="fas fa-cog"></i> <a href="#">Configuración</a></li>
-            <li><i class="fas fa-sign-out-alt"></i> <a href="logout.php">Cerrar sesión</a></li>
-        </ul>
-    </div>
-    <div class="main-content">
-        <h1>Panel de Control</h1>
-        <p>Información general de los usuarios registrados.</p>
-        <div class="info-cards">
-            <div class="card">
-                <h3>Total de Usuarios</h3>
-                <p id="total-users">150</p>
-            </div>
-            <div class="card">
-                <h3>Planes Registrados</h3>
-                <p>Plan A, B, C</p>
-            </div>
-        </div>
-        <div class="chart-container">
-            <canvas id="userChart"></canvas>
-        </div>
-    </div>
+/* Estilo general del contenedor principal */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    color: #333;
+}
 
-    <script>
-        // Configuración del gráfico
-        const ctx = document.getElementById('userChart').getContext('2d');
-        const userChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['Plan A', 'Plan B', 'Plan C'],
-                datasets: [{
-                    data: [50, 70, 30], // Datos de ejemplo
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                    hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                },
-            }
-        });
-    </script>
-</body>
-</html>
+/* Barra lateral */
+.sidebar {
+    width: 250px;
+    background: #2c3e50;
+    color: #fff;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: block;
+    transition: background 0.3s;
+}
+
+.sidebar a:hover {
+    background: #34495e;
+}
+
+.sidebar a.active {
+    background: #16a085;
+}
+
+/* Contenido principal */
+.content {
+    margin-left: 260px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+/* Título del dashboard */
+.content h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.content p {
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Tarjetas informativas */
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    flex: 1;
+    min-width: 250px;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 18px;
+}
+
+/* Gráfica */
+.chart-container {
+    margin-top: 40px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 600px; /* Ancho máximo */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.chart-container canvas {
+    max-height: 400px; /* Altura máxima */
+    max-width: 100%;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .content {
+        margin-left: 0;
+        margin: 20px;
+    }
+}
