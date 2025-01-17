@@ -9,8 +9,8 @@ try {
     $host = 'localhost';
     $port = 3306; // Cambiar si usas otro puerto
     $dbname = 'segurosanabarragan';
-    $username = 'brenda';
-    $password = 'brenda*123';
+    $username = 'ana';
+    $password = 'ana*123';
 
     // Crear conexión PDO
     $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8";
