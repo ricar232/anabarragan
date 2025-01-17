@@ -12,6 +12,13 @@
         <!-- Botón para regresar al dashboard -->
         <a href="dashboard.php" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Dashboard</a>
         
+        <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+           <div class="alert-success">
+               <p><i class="fas fa-check-circle"></i> Usuario registrado exitosamente.</p>
+           </div>
+        <?php endif; ?>
+
+
         <!-- Contenido principal -->
         <main class="main-content">
             <section class="register-form">
