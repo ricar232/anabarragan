@@ -5,16 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Moderno</title>
     <link rel="stylesheet" href="css/dashboard.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="dashboard-container">
-        <!-- Botón para alternar la barra lateral en móviles -->
-        <div class="toggle-sidebar" onclick="toggleSidebar()">
-            <i class="fas fa-bars"></i>
-        </div>
-
         <!-- Barra lateral -->
         <aside class="sidebar">
             <div class="logo">
@@ -59,10 +54,24 @@
         </main>
     </div>
 
+    <!-- Botón de toggle para la barra lateral -->
+    <button class="toggle-sidebar"><i class="fas fa-bars"></i></button>
+
     <script>
-        function toggleSidebar() {
-            document.querySelector('.sidebar').classList.toggle('open');
-        }
+        // Mostrar/Ocultar barra lateral
+        const sidebar = document.querySelector('.sidebar');
+        const toggleSidebarButton = document.querySelector('.toggle-sidebar');
+
+        toggleSidebarButton.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+
+        // Ajustar barra lateral en diferentes tamaños
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('open');
+            }
+        });
 
         // Gráfico de líneas
         const ctxLine = document.getElementById('lineChart').getContext('2d');
