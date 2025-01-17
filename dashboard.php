@@ -1,16 +1,20 @@
 <?php
-require 'conexion.php';
+require 'conexion.php'; // Conexión a la base de datos
 
+// Obtener el año actual
 $anio_actual = date('Y');
 
-$sql_total_usuarios = "SELECT COUNT(*) AS total_usuarios FROM usuarios_registrados";
-$result_total = $conn->query($sql_total_usuarios);
-$total_usuarios = $result_total->fetch(PDO::FETCH_ASSOC)['total_usuarios'];
+// Consultar el total de usuarios
+$sql_total_usuarios = "SELECT COUNT(*) AS total FROM usuarios_registrados";
+$stmt_total = $conn->query($sql_total_usuarios);
+$total_usuarios = $stmt_total->fetch(PDO::FETCH_ASSOC)['total'];
 
+// Consultar los planes activos
 $sql_planes_activos = "SELECT plan_medico, COUNT(*) AS total FROM usuarios_registrados GROUP BY plan_medico";
-$result_planes = $conn->query($sql_planes_activos);
-$planes = $result_planes->fetchAll(PDO::FETCH_ASSOC);
+$stmt_planes = $conn->query($sql_planes_activos);
+$planes_activos = $stmt_planes->fetchAll(PDO::FETCH_ASSOC);
 
+// Consultar los nuevos usuarios por mes
 $sql_nuevos_usuarios = "
     SELECT MONTH(fecha_nacimiento) AS mes, COUNT(*) AS total 
     FROM usuarios_registrados 
@@ -21,20 +25,21 @@ $stmt_nuevos->bindParam(':anio_actual', $anio_actual, PDO::PARAM_INT);
 $stmt_nuevos->execute();
 $nuevos_datos = $stmt_nuevos->fetchAll(PDO::FETCH_ASSOC);
 
-$meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+// Inicializar valores de nuevos usuarios por mes
 $valores_nuevos = array_fill(0, 12, 0);
-
 foreach ($nuevos_datos as $dato) {
     $valores_nuevos[$dato['mes'] - 1] = $dato['total'];
 }
 
-$nombres_planes = [];
-$valores_planes = [];
-foreach ($planes as $plan) {
-    $nombres_planes[] = $plan['plan_medico'];
-    $valores_planes[] = $plan['total'];
+// Inicializar datos de planes activos
+$planes_nombres = [];
+$planes_totales = [];
+foreach ($planes_activos as $plan) {
+    $planes_nombres[] = $plan['plan_medico'];
+    $planes_totales[] = $plan['total'];
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,26 +48,32 @@ foreach ($planes as $plan) {
     <title>Dashboard Moderno</title>
     <link rel="stylesheet" href="css/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="dashboard-container">
+        <!-- Barra lateral -->
         <aside class="sidebar">
             <div class="logo">
                 <i class="fas fa-chart-line"></i>
                 <span>Admin Panel</span>
             </div>
             <ul>
-                <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="dashboard.php"><i class="fas fa-home"></i> Inicio</a></li>
                 <li><a href="agregar_usuario.php"><i class="fas fa-user-plus"></i> Agregar Usuarios</a></li>
                 <li><a href="lista_usuarios.php"><i class="fas fa-users"></i> Listar Usuarios</a></li>
+                <li><a href="configuracion.php"><i class="fas fa-cogs"></i> Configuración</a></li>
+                <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
             </ul>
         </aside>
 
+        <!-- Contenido principal -->
         <main class="main-content">
             <header>
                 <h1><i class="fas fa-chart-pie"></i> Panel de Control - Año <?php echo $anio_actual; ?></h1>
                 <p>Resumen general de los datos registrados.</p>
             </header>
+
             <section class="info-cards">
                 <div class="card">
                     <h2><i class="fas fa-users"></i> Total de Usuarios</h2>
@@ -70,11 +81,14 @@ foreach ($planes as $plan) {
                 </div>
                 <div class="card">
                     <h2><i class="fas fa-file-medical"></i> Planes Activos</h2>
-                    <p><?php foreach ($planes as $plan) {
-                        echo $plan['plan_medico'] . " (" . $plan['total'] . "), ";
-                    } ?></p>
+                    <p>
+                        <?php foreach ($planes_activos as $plan) {
+                            echo $plan['plan_medico'] . ' (' . $plan['total'] . '), ';
+                        } ?>
+                    </p>
                 </div>
             </section>
+
             <section class="charts">
                 <div class="chart-container">
                     <canvas id="lineChart"></canvas>
@@ -85,12 +99,14 @@ foreach ($planes as $plan) {
             </section>
         </main>
     </div>
+
     <script>
+        // Gráfico de líneas
         const ctxLine = document.getElementById('lineChart').getContext('2d');
         new Chart(ctxLine, {
             type: 'line',
             data: {
-                labels: <?php echo json_encode($meses); ?>,
+                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                 datasets: [{
                     label: 'Nuevos Usuarios',
                     data: <?php echo json_encode($valores_nuevos); ?>,
@@ -98,23 +114,38 @@ foreach ($planes as $plan) {
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 }]
             },
-            options: { responsive: true, plugins: { legend: { position: 'top' } } }
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'top' } }
+            }
         });
 
+        // Gráfico de barras
         const ctxBar = document.getElementById('barChart').getContext('2d');
         new Chart(ctxBar, {
             type: 'bar',
             data: {
-                labels: <?php echo json_encode($nombres_planes); ?>,
+                labels: <?php echo json_encode($planes_nombres); ?>,
                 datasets: [{
                     label: 'Usuarios por Plan',
-                    data: <?php echo json_encode($valores_planes); ?>,
-                    backgroundColor: ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)'],
-                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                    data: <?php echo json_encode($planes_totales); ?>,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
                     borderWidth: 1
                 }]
             },
-            options: { responsive: true, plugins: { legend: { position: 'top' } } }
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'top' } }
+            }
         });
     </script>
 </body>
