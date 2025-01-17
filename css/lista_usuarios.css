@@ -10,26 +10,26 @@ body {
 }
 
 .container {
-    max-width: 90%;
-    margin: 2rem auto;
-    background: rgba(255, 255, 255, 0.9);
+    max-width: 80%;
+    margin: 3rem auto;
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 15px;
-    padding: 2rem;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(12px);
+    padding: 2.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .container:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
 }
 
 .title {
     text-align: center;
     color: #4A47A3;
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+    font-size: 2.8rem;
+    margin-bottom: 2.5rem;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -42,17 +42,19 @@ table {
     border-collapse: collapse;
     margin-bottom: 2rem;
     animation: slideIn 1s ease-out;
+    text-align: center;
 }
 
 thead {
-    background-color: rgba(74, 71, 163, 0.8);
+    background-color: rgba(74, 71, 163, 0.85);
     color: #fff;
 }
 
 thead th {
     padding: 1rem;
-    text-align: left;
+    text-align: center;
     font-weight: bold;
+    font-size: 1rem;
 }
 
 tbody tr {
@@ -66,11 +68,12 @@ tbody tr:hover {
 
 tbody td {
     padding: 0.8rem;
-    text-align: left;
+    text-align: center;
     word-wrap: break-word;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 0.9rem;
 }
 
 /* Botones de acción */
@@ -116,25 +119,25 @@ tbody td {
 @media (max-width: 1024px) {
     .container {
         max-width: 95%;
-        padding: 1.5rem;
+        padding: 2rem;
     }
 
     .title {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
 
     table {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
     thead th, tbody td {
-        padding: 0.5rem;
+        padding: 0.6rem;
     }
 }
 
 @media (max-width: 768px) {
     .container {
-        padding: 1rem;
+        padding: 1.5rem;
     }
 
     .title {
