@@ -1,23 +1,47 @@
-<?php
-session_start();
-
-// Verificar si el usuario ha iniciado sesión
-if (!isset($_SESSION['usuario'])) {
-    header("Location: index.php");
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css"> <!-- Estilos específicos del dashboard -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Iconos modernos -->
 </head>
 <body>
-    <h1>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario']); ?>!</h1>
-    <p>Este es tu panel de control.</p>
-    <a href="logout.php">Cerrar sesión</a>
+    <div class="dashboard-container">
+        <!-- Menú lateral -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-user-circle"></i> Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario']); ?></h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Usuarios</a></li>
+                <li><a href="#"><i class="fas fa-cogs"></i> Configuración</a></li>
+                <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+            </ul>
+        </nav>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Panel de Control</h1>
+            </header>
+            <section class="dashboard-cards">
+                <div class="card">
+                    <h3>Usuarios registrados</h3>
+                    <p>150</p>
+                </div>
+                <div class="card">
+                    <h3>Proyectos activos</h3>
+                    <p>10</p>
+                </div>
+                <div class="card">
+                    <h3>Notificaciones</h3>
+                    <p>3 nuevas</p>
+                </div>
+            </section>
+        </main>
+    </div>
 </body>
 </html>
