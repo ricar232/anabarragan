@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <h1 class="title"><i class="fas fa-user-plus"></i> Registrar Usuario</h1>
-        <form class="form-container" action="procesar_usuario.php" method="POST">
+        <form class="form-container" action="registrar_usuario.php" method="POST">
             <div class="form-group">
                 <label for="nombre">Nombre y Apellidos</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Nombre y apellidos" required>
