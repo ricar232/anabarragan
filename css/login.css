@@ -29,7 +29,7 @@ body, html {
 h1 {
     font-size: 2rem;
     margin-bottom: 1rem;
-    color: #fff;
+    color: #000000bd;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,7 +46,7 @@ label {
     font-weight: bold;
     display: block;
     margin-bottom: 0.5rem;
-    color: #fff;
+    color: #000000be;
     font-size: 1rem;
 }
 
@@ -69,7 +69,7 @@ input:focus {
 /* Botón */
 .btn-login {
     background: #4a90e2;
-    color: #fff;
+    color: #000000ab;
     padding: 0.7rem 1rem;
     border: none;
     border-radius: 5px;
