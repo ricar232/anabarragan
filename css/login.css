@@ -3,62 +3,73 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif; /* Tipografía moderna */
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to bottom, #4a90e2, #145da0); /* Degradado como respaldo */
+    background: linear-gradient(to bottom, rgba(74, 144, 226, 0.8), rgba(20, 93, 160, 0.8));
+    overflow: hidden;
 }
 
+/* Fondo con efecto de desenfoque */
 .background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('../img/background.jpg') no-repeat center center/cover;
-    filter: blur(8px);
+    background: url('../img/background01.jpg') no-repeat center center/cover;
+    filter: blur(15px);
     z-index: -1;
 }
 
 /* Contenedor del login */
 .login-container {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.2); /* Transparencia */
+    backdrop-filter: blur(10px); /* Desenfoque */
     padding: 2rem;
     border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     text-align: center;
     width: 100%;
     max-width: 400px;
+    color: #fff;
     animation: fadeIn 1s ease-in-out;
 }
 
 /* Título */
 h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 /* Estilos de inputs */
 .input-container {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     text-align: left;
 }
 
 label {
     font-weight: bold;
     display: block;
-    margin-bottom: 0.3rem;
-    color: #555;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    font-size: 1.1rem;
 }
 
 input {
     width: 100%;
     padding: 0.7rem;
-    border: 1px solid #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 5px;
     font-size: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
     transition: border-color 0.3s ease;
 }
 
@@ -75,8 +86,12 @@ input:focus {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.2rem;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     transition: background 0.3s ease, transform 0.2s ease;
 }
 
@@ -87,9 +102,10 @@ input:focus {
 
 /* Mensaje de error */
 .error-message {
-    color: red;
+    color: #ff5252;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
     animation: shake 0.5s ease-in-out;
 }
 
