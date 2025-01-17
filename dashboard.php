@@ -70,8 +70,7 @@
             },
             options: {
                 responsive: true,
-                plugins: { legend: { position: 'top' } },
-                maintainAspectRatio: false
+                plugins: { legend: { position: 'top' } }
             }
         });
 
@@ -99,8 +98,7 @@
             },
             options: {
                 responsive: true,
-                plugins: { legend: { position: 'top' } },
-                maintainAspectRatio: false
+                plugins: { legend: { position: 'top' } }
             }
         });
     </script>
