@@ -1,5 +1,4 @@
 <?php
-// Incluir la conexión a la base de datos
 require 'conexion.php';
 
 // Consultar los usuarios registrados
@@ -20,6 +19,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Usuarios</title>
     <link rel="stylesheet" href="css/lista_usuarios.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
@@ -29,11 +29,9 @@ try {
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Fecha de Nacimiento</th>
                     <th>Teléfono</th>
                     <th>Correo Electrónico</th>
-                    <th>Seguro Social</th>
-                    <th>Plan Médico</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,16 +40,17 @@ try {
                         <tr>
                             <td><?php echo htmlspecialchars($usuario['id']); ?></td>
                             <td><?php echo htmlspecialchars($usuario['nombre']); ?></td>
-                            <td><?php echo htmlspecialchars($usuario['fecha_nacimiento']); ?></td>
                             <td><?php echo htmlspecialchars($usuario['telefono']); ?></td>
                             <td><?php echo htmlspecialchars($usuario['correo']); ?></td>
-                            <td><?php echo htmlspecialchars($usuario['seguro_social']); ?></td>
-                            <td><?php echo htmlspecialchars($usuario['plan_medico']); ?></td>
+                            <td>
+                                <a href="editar_usuario.php?id=<?php echo $usuario['id']; ?>" class="edit-button"><i class="fas fa-edit"></i></a>
+                                <a href="borrar_usuario.php?id=<?php echo $usuario['id']; ?>" class="delete-button" onclick="return confirm('¿Estás seguro de borrar este usuario?');"><i class="fas fa-trash"></i></a>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="7">No hay usuarios registrados.</td>
+                        <td colspan="5">No hay usuarios registrados.</td>
                     </tr>
                 <?php endif; ?>
             </tbody>
