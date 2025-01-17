@@ -1,42 +1,33 @@
 <?php
-require 'conexion.php'; // Conexión a la base de datos
+// Incluye la conexión a la base de datos
+require 'conexion.php';
 
-// Obtener el año actual
-$anio_actual = date('Y');
+// Inicializa un array para los meses
+$meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-// Consultar el total de usuarios
-$sql_total_usuarios = "SELECT COUNT(*) AS total FROM usuarios_registrados";
-$stmt_total = $conn->query($sql_total_usuarios);
-$total_usuarios = $stmt_total->fetch(PDO::FETCH_ASSOC)['total'];
+// Consulta SQL para obtener la cantidad de usuarios registrados por mes
+$sql = "SELECT MONTH(fecha_registro) AS mes, COUNT(*) AS total FROM usuarios_registrados WHERE YEAR(fecha_registro) = YEAR(CURDATE()) GROUP BY mes";
+$result = $conn->query($sql);
 
-// Consultar los planes activos
-$sql_planes_activos = "SELECT plan_medico, COUNT(*) AS total FROM usuarios_registrados GROUP BY plan_medico";
-$stmt_planes = $conn->query($sql_planes_activos);
-$planes_activos = $stmt_planes->fetchAll(PDO::FETCH_ASSOC);
+// Inicializa un array con valores 0 para todos los meses
+$usuariosPorMes = array_fill(0, 12, 0);
 
-// Consultar los nuevos usuarios por mes
-$sql_nuevos_usuarios = "
-    SELECT MONTH(fecha_nacimiento) AS mes, COUNT(*) AS total 
-    FROM usuarios_registrados 
-    WHERE YEAR(fecha_nacimiento) = :anio_actual 
-    GROUP BY mes";
-$stmt_nuevos = $conn->prepare($sql_nuevos_usuarios);
-$stmt_nuevos->bindParam(':anio_actual', $anio_actual, PDO::PARAM_INT);
-$stmt_nuevos->execute();
-$nuevos_datos = $stmt_nuevos->fetchAll(PDO::FETCH_ASSOC);
-
-// Inicializar valores de nuevos usuarios por mes
-$valores_nuevos = array_fill(0, 12, 0);
-foreach ($nuevos_datos as $dato) {
-    $valores_nuevos[$dato['mes'] - 1] = $dato['total'];
+// Procesa los resultados de la consulta
+while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    $usuariosPorMes[$row['mes'] - 1] = $row['total'];
 }
 
-// Inicializar datos de planes activos
-$planes_nombres = [];
-$planes_totales = [];
-foreach ($planes_activos as $plan) {
-    $planes_nombres[] = $plan['plan_medico'];
-    $planes_totales[] = $plan['total'];
+// Consulta SQL para obtener los planes médicos y el número de usuarios
+$sql_planes = "SELECT plan_medico, COUNT(*) AS total FROM usuarios_registrados GROUP BY plan_medico";
+$result_planes = $conn->query($sql_planes);
+
+// Procesa los resultados para los planes médicos
+$planes = [];
+while ($row = $result_planes->fetch(PDO::FETCH_ASSOC)) {
+    $planes[] = [
+        'plan' => $row['plan_medico'],
+        'total' => $row['total']
+    ];
 }
 ?>
 
@@ -59,10 +50,10 @@ foreach ($planes_activos as $plan) {
                 <span>Admin Panel</span>
             </div>
             <ul>
-                <li><a href="dashboard.php"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
                 <li><a href="agregar_usuario.php"><i class="fas fa-user-plus"></i> Agregar Usuarios</a></li>
                 <li><a href="lista_usuarios.php"><i class="fas fa-users"></i> Listar Usuarios</a></li>
-                <li><a href="configuracion.php"><i class="fas fa-cogs"></i> Configuración</a></li>
+                <li><a href="#"><i class="fas fa-cogs"></i> Configuración</a></li>
                 <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
             </ul>
         </aside>
@@ -70,21 +61,23 @@ foreach ($planes_activos as $plan) {
         <!-- Contenido principal -->
         <main class="main-content">
             <header>
-                <h1><i class="fas fa-chart-pie"></i> Panel de Control - Año <?php echo $anio_actual; ?></h1>
+                <h1><i class="fas fa-chart-pie"></i> Panel de Control - Año <?php echo date('Y'); ?></h1>
                 <p>Resumen general de los datos registrados.</p>
             </header>
 
             <section class="info-cards">
                 <div class="card">
                     <h2><i class="fas fa-users"></i> Total de Usuarios</h2>
-                    <p><?php echo $total_usuarios; ?></p>
+                    <p><?php echo array_sum($usuariosPorMes); ?></p>
                 </div>
                 <div class="card">
                     <h2><i class="fas fa-file-medical"></i> Planes Activos</h2>
                     <p>
-                        <?php foreach ($planes_activos as $plan) {
-                            echo $plan['plan_medico'] . ' (' . $plan['total'] . '), ';
-                        } ?>
+                        <?php
+                        foreach ($planes as $plan) {
+                            echo htmlspecialchars($plan['plan']) . " ({$plan['total']}), ";
+                        }
+                        ?>
                     </p>
                 </div>
             </section>
@@ -101,7 +94,11 @@ foreach ($planes_activos as $plan) {
     </div>
 
     <script>
-        // Gráfico de líneas
+        // Datos dinámicos desde PHP
+        const usuariosPorMes = <?php echo json_encode($usuariosPorMes); ?>;
+        const planes = <?php echo json_encode($planes); ?>;
+
+        // Configuración para la gráfica de líneas
         const ctxLine = document.getElementById('lineChart').getContext('2d');
         new Chart(ctxLine, {
             type: 'line',
@@ -109,7 +106,7 @@ foreach ($planes_activos as $plan) {
                 labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                 datasets: [{
                     label: 'Nuevos Usuarios',
-                    data: <?php echo json_encode($valores_nuevos); ?>,
+                    data: usuariosPorMes,
                     borderColor: 'rgba(75, 192, 192, 1)',
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 }]
@@ -120,15 +117,15 @@ foreach ($planes_activos as $plan) {
             }
         });
 
-        // Gráfico de barras
+        // Configuración para la gráfica de barras
         const ctxBar = document.getElementById('barChart').getContext('2d');
         new Chart(ctxBar, {
             type: 'bar',
             data: {
-                labels: <?php echo json_encode($planes_nombres); ?>,
+                labels: planes.map(plan => plan.plan),
                 datasets: [{
                     label: 'Usuarios por Plan',
-                    data: <?php echo json_encode($planes_totales); ?>,
+                    data: planes.map(plan => plan.total),
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.5)',
                         'rgba(54, 162, 235, 0.5)',
