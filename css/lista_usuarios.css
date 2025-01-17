@@ -1,7 +1,7 @@
 /* Estilo general */
 body {
     font-family: 'Poppins', sans-serif;
-    background: url('../img/05.jpg') no-repeat center center fixed;
+    background: url('../images/background.jpg') no-repeat center center fixed;
     background-size: cover;
     margin: 0;
     padding: 0;
@@ -10,13 +10,13 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 90%;
     margin: 2rem auto;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
     padding: 2rem;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -68,6 +68,9 @@ tbody td {
     padding: 0.8rem;
     text-align: left;
     word-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Botones de acción */
@@ -110,6 +113,25 @@ tbody td {
 }
 
 /* Responsividad */
+@media (max-width: 1024px) {
+    .container {
+        max-width: 95%;
+        padding: 1.5rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    thead th, tbody td {
+        padding: 0.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 1rem;
@@ -120,11 +142,14 @@ tbody td {
     }
 
     table {
-        font-size: 0.9rem;
+        display: block;
+        overflow-x: auto;
+        font-size: 0.8rem;
     }
 
     thead th, tbody td {
         padding: 0.5rem;
+        white-space: nowrap;
     }
 
     .btn-back {
