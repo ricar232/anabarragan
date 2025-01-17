@@ -11,13 +11,16 @@
 <body>
     <div class="dashboard-container">
         <aside class="sidebar">
-            <h2><i class="fas fa-user-circle"></i> Bienvenido</h2>
+            <div class="logo">
+                <i class="fas fa-hospital-user"></i>
+                <span>Admin Panel</span>
+            </div>
             <ul>
                 <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
                 <li><a href="agregar_usuario.php"><i class="fas fa-user-plus"></i> Agregar Usuarios</a></li>
                 <li><a href="lista_usuarios.php"><i class="fas fa-users"></i> Listar Usuarios</a></li>
-                <li><a href="#"><i class="fas fa-cog"></i> Configuración</a></li>
-                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+                <li><a href="#"><i class="fas fa-cogs"></i> Configuración</a></li>
+                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
             </ul>
         </aside>
         <main class="main-content">
@@ -42,36 +45,24 @@
     <script>
         const ctx = document.getElementById('userChart').getContext('2d');
         const userChart = new Chart(ctx, {
-            type: 'doughnut', // Gráfica de dona moderna
+            type: 'doughnut', 
             data: {
                 labels: ['Plan A', 'Plan B', 'Plan C'],
                 datasets: [{
-                    label: 'Usuarios por Plan',
                     data: [50, 70, 30],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.5)',
                         'rgba(54, 162, 235, 0.5)',
                         'rgba(255, 206, 86, 0.5)'
                     ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)'
-                    ],
-                    borderWidth: 2
+                    borderWidth: 1
                 }]
             },
             options: {
                 responsive: true,
                 plugins: {
                     legend: {
-                        display: true,
-                        position: 'top'
-                    },
-                    tooltip: {
-                        enabled: true,
-                        mode: 'index',
-                        intersect: false
+                        position: 'bottom'
                     }
                 }
             }
