@@ -23,10 +23,6 @@ body {
     z-index: 10;
 }
 
-.sidebar.closed {
-    transform: translateX(-100%);
-}
-
 .sidebar .logo {
     font-size: 20px;
     font-weight: bold;
@@ -58,10 +54,6 @@ body {
     padding: 20px;
     flex-grow: 1;
     transition: margin-left 0.3s ease-in-out;
-}
-
-.main-content.expanded {
-    margin-left: 0;
 }
 
 .info-cards {
