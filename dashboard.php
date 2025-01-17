@@ -7,8 +7,130 @@
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Mejoras específicas para los márgenes y diseño */
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background-color: #1e293b;
+            color: #ffffff;
+            width: 250px;
+            min-height: 100vh;
+            transition: transform 0.3s ease;
+            position: fixed;
+            z-index: 1000;
+            transform: translateX(-100%);
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .sidebar .logo {
+            padding: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid #334155;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 15px 20px;
+            border-bottom: 1px solid #334155;
+            transition: background 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #475569;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.shrink {
+            margin-left: 0;
+        }
+
+        .toggle-sidebar {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background-color: #1e293b;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .info-cards {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            flex: 1;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .charts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .chart-container {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                position: fixed;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .charts {
+                grid-template-columns: 1fr;
+            }
+
+            .toggle-sidebar {
+                display: block;
+            }
+        }
+    </style>
 </head>
 <body>
+    <button class="toggle-sidebar"><i class="fas fa-bars"></i></button>
     <div class="dashboard-container">
         <!-- Barra lateral -->
         <aside class="sidebar">
@@ -54,23 +176,12 @@
         </main>
     </div>
 
-    <!-- Botón de toggle para la barra lateral -->
-    <button class="toggle-sidebar"><i class="fas fa-bars"></i></button>
-
     <script>
-        // Mostrar/Ocultar barra lateral
         const sidebar = document.querySelector('.sidebar');
         const toggleSidebarButton = document.querySelector('.toggle-sidebar');
 
         toggleSidebarButton.addEventListener('click', () => {
             sidebar.classList.toggle('open');
-        });
-
-        // Ajustar barra lateral en diferentes tamaños
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                sidebar.classList.remove('open');
-            }
         });
 
         // Gráfico de líneas
