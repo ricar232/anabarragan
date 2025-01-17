@@ -1,10 +1,12 @@
-/* Estilos generales */
+/* Fondo general */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
     background: #f4f6f9;
     display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
 }
 
@@ -16,9 +18,9 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     width: 80%;
     max-width: 900px;
-    margin: 20px auto;
 }
 
+/* Estilos del formulario */
 .register-form form {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -40,6 +42,12 @@ body {
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #4a90e2;
+    outline: none;
 }
 
 .btn-submit {
