@@ -10,6 +10,11 @@
 </head>
 <body>
     <div class="dashboard-container">
+        <!-- Botón para alternar la barra lateral en móviles -->
+        <div class="toggle-sidebar" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+        </div>
+
         <!-- Barra lateral -->
         <aside class="sidebar">
             <div class="logo">
@@ -55,6 +60,10 @@
     </div>
 
     <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('open');
+        }
+
         // Gráfico de líneas
         const ctxLine = document.getElementById('lineChart').getContext('2d');
         new Chart(ctxLine, {
