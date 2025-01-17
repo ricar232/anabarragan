@@ -45,24 +45,37 @@
     <script>
         const ctx = document.getElementById('userChart').getContext('2d');
         const userChart = new Chart(ctx, {
-            type: 'doughnut', 
+            type: 'bar', // Cambiado a bar para mejor diseño
             data: {
                 labels: ['Plan A', 'Plan B', 'Plan C'],
                 datasets: [{
+                    label: 'Usuarios por Plan',
                     data: [50, 70, 30],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.5)',
                         'rgba(54, 162, 235, 0.5)',
                         'rgba(255, 206, 86, 0.5)'
                     ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
                     borderWidth: 1
                 }]
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
+                        display: true,
                         position: 'bottom'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
                     }
                 }
             }
