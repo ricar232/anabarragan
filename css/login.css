@@ -14,7 +14,7 @@ body, html {
 
 /* Contenedor del login */
 .login-container {
-    background: rgba(255, 255, 255, 0.15); /* Transparencia */
+    background: rgba(0, 0, 0, 0.377); /* Transparencia */
     backdrop-filter: blur(20px); /* Desenfoque */
     padding: 2rem;
     border-radius: 15px;
