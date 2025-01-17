@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Botón hamburguesa para dispositivos móviles -->
-    <button class="hamburger"><i class="fas fa-bars"></i></button>
-    
     <div class="dashboard-container">
         <!-- Barra lateral -->
         <aside class="sidebar">
@@ -58,14 +55,6 @@
     </div>
 
     <script>
-        // Funcionalidad del botón hamburguesa
-        const hamburger = document.querySelector('.hamburger');
-        const sidebar = document.querySelector('.sidebar');
-
-        hamburger.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-        });
-
         // Gráfico de líneas
         const ctxLine = document.getElementById('lineChart').getContext('2d');
         new Chart(ctxLine, {
@@ -81,7 +70,8 @@
             },
             options: {
                 responsive: true,
-                plugins: { legend: { position: 'top' } }
+                plugins: { legend: { position: 'top' } },
+                maintainAspectRatio: false
             }
         });
 
@@ -109,7 +99,8 @@
             },
             options: {
                 responsive: true,
-                plugins: { legend: { position: 'top' } }
+                plugins: { legend: { position: 'top' } },
+                maintainAspectRatio: false
             }
         });
     </script>
