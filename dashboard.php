@@ -1,3 +1,39 @@
+<?php
+// Incluir la conexión a la base de datos
+require 'conexion.php';
+
+// Total de usuarios
+$sql_total_usuarios = "SELECT COUNT(*) AS total_usuarios FROM usuarios_registrados";
+$result_total = $conn->query($sql_total_usuarios);
+$total_usuarios = $result_total->fetch(PDO::FETCH_ASSOC)['total_usuarios'];
+
+// Planes activos
+$sql_planes_activos = "SELECT plan_medico, COUNT(*) AS total FROM usuarios_registrados GROUP BY plan_medico";
+$result_planes = $conn->query($sql_planes_activos);
+$planes = $result_planes->fetchAll(PDO::FETCH_ASSOC);
+
+// Nuevos usuarios por mes
+$sql_nuevos_usuarios = "SELECT MONTH(fecha_nacimiento) AS mes, COUNT(*) AS total FROM usuarios_registrados GROUP BY mes";
+$result_nuevos = $conn->query($sql_nuevos_usuarios);
+$nuevos_datos = $result_nuevos->fetchAll(PDO::FETCH_ASSOC);
+
+// Preparar datos para el gráfico de líneas
+$meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+$valores_nuevos = array_fill(0, 12, 0);
+
+foreach ($nuevos_datos as $dato) {
+    $valores_nuevos[$dato['mes'] - 1] = $dato['total'];
+}
+
+// Datos del gráfico de barras (usuarios por plan)
+$nombres_planes = [];
+$valores_planes = [];
+
+foreach ($planes as $plan) {
+    $nombres_planes[] = $plan['plan_medico'];
+    $valores_planes[] = $plan['total'];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,11 +71,15 @@
             <section class="info-cards">
                 <div class="card">
                     <h2><i class="fas fa-users"></i> Total de Usuarios</h2>
-                    <p>150</p>
+                    <p><?php echo $total_usuarios; ?></p>
                 </div>
                 <div class="card">
                     <h2><i class="fas fa-file-medical"></i> Planes Activos</h2>
-                    <p>Plan A, B, C</p>
+                    <p>
+                        <?php foreach ($planes as $plan) {
+                            echo $plan['plan_medico'] . " (" . $plan['total'] . "), ";
+                        } ?>
+                    </p>
                 </div>
             </section>
 
@@ -55,15 +95,15 @@
     </div>
 
     <script>
-        // Gráfico de líneas
+        // Gráfico de líneas (Nuevos Usuarios)
         const ctxLine = document.getElementById('lineChart').getContext('2d');
         new Chart(ctxLine, {
             type: 'line',
             data: {
-                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
+                labels: <?php echo json_encode($meses); ?>,
                 datasets: [{
                     label: 'Nuevos Usuarios',
-                    data: [30, 45, 60, 40, 80],
+                    data: <?php echo json_encode($valores_nuevos); ?>,
                     borderColor: 'rgba(75, 192, 192, 1)',
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 }]
@@ -74,15 +114,15 @@
             }
         });
 
-        // Gráfico de barras
+        // Gráfico de barras (Usuarios por Plan)
         const ctxBar = document.getElementById('barChart').getContext('2d');
         new Chart(ctxBar, {
             type: 'bar',
             data: {
-                labels: ['Plan A', 'Plan B', 'Plan C'],
+                labels: <?php echo json_encode($nombres_planes); ?>,
                 datasets: [{
                     label: 'Usuarios por Plan',
-                    data: [50, 70, 30],
+                    data: <?php echo json_encode($valores_planes); ?>,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.5)',
                         'rgba(54, 162, 235, 0.5)',
