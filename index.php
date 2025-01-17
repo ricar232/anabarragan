@@ -12,7 +12,7 @@
     <div class="login-container">
         <h1><i class="fas fa-user-circle"></i> Iniciar Sesión</h1>
 
-        <!-- Mostrar mensaje de error -->
+        <!-- Mostrar mensaje de error solo si existe el parámetro 'error' -->
         <?php if (isset($_GET['error']) && $_GET['error'] == 1): ?>
             <p class="error-message"><i class="fas fa-exclamation-triangle"></i> Usuario o contraseña incorrectos.</p>
         <?php endif; ?>
