@@ -1,34 +1,16 @@
-<?php
-session_start();
-
-// Verificar si el usuario ha iniciado sesión
-if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php");
-    exit();
-}
-
-// Datos de prueba
-$total_usuarios = 150;
-$planes_activos = "Plan A, B, C";
-$nuevos_usuarios = [30, 50, 40, 25, 70]; // Datos ficticios para el gráfico
-$usuarios_por_plan = [50, 70, 30]; // Datos ficticios por plan
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Dashboard Moderno</title>
     <link rel="stylesheet" href="css/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <button class="sidebar-toggle" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i>
-    </button>
     <div class="dashboard-container">
+        <!-- Barra lateral -->
         <aside class="sidebar">
             <div class="logo">
                 <i class="fas fa-chart-line"></i>
@@ -42,79 +24,65 @@ $usuarios_por_plan = [50, 70, 30]; // Datos ficticios por plan
                 <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
             </ul>
         </aside>
+
+        <!-- Contenido principal -->
         <main class="main-content">
-            <h1><i class="fas fa-chart-pie"></i> Panel de Control</h1>
-            <p>Resumen general de los datos registrados.</p>
-            <div class="cards-container">
+            <header>
+                <h1><i class="fas fa-chart-pie"></i> Panel de Control</h1>
+                <p>Resumen general de los datos registrados.</p>
+            </header>
+
+            <section class="info-cards">
                 <div class="card">
                     <h2><i class="fas fa-users"></i> Total de Usuarios</h2>
-                    <p><?= $total_usuarios ?></p>
+                    <p>150</p>
                 </div>
                 <div class="card">
                     <h2><i class="fas fa-file-medical"></i> Planes Activos</h2>
-                    <p><?= $planes_activos ?></p>
+                    <p>Plan A, B, C</p>
                 </div>
-            </div>
-            <div class="chart-container">
-                <canvas id="lineChart"></canvas>
-            </div>
-            <div class="chart-container">
-                <canvas id="barChart"></canvas>
-            </div>
+            </section>
+
+            <section class="charts">
+                <div class="chart-container">
+                    <canvas id="lineChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="barChart"></canvas>
+                </div>
+            </section>
         </main>
     </div>
 
     <script>
-        function toggleSidebar() {
-            document.querySelector('.sidebar').classList.toggle('show');
-        }
-
-        // Gráfico de línea
-        const lineCtx = document.getElementById('lineChart').getContext('2d');
-        const lineChart = new Chart(lineCtx, {
+        // Gráfico de líneas
+        const ctxLine = document.getElementById('lineChart').getContext('2d');
+        new Chart(ctxLine, {
             type: 'line',
             data: {
                 labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
                 datasets: [{
                     label: 'Nuevos Usuarios',
-                    data: <?= json_encode($nuevos_usuarios) ?>,
+                    data: [30, 45, 60, 40, 80],
                     borderColor: 'rgba(75, 192, 192, 1)',
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderWidth: 2,
-                    fill: true
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top'
-                    }
-                },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+                plugins: { legend: { position: 'top' } }
             }
         });
 
         // Gráfico de barras
-        const barCtx = document.getElementById('barChart').getContext('2d');
-        const barChart = new Chart(barCtx, {
+        const ctxBar = document.getElementById('barChart').getContext('2d');
+        new Chart(ctxBar, {
             type: 'bar',
             data: {
                 labels: ['Plan A', 'Plan B', 'Plan C'],
                 datasets: [{
                     label: 'Usuarios por Plan',
-                    data: <?= json_encode($usuarios_por_plan) ?>,
+                    data: [50, 70, 30],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.5)',
                         'rgba(54, 162, 235, 0.5)',
@@ -130,18 +98,7 @@ $usuarios_por_plan = [50, 70, 30]; // Datos ficticios por plan
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top'
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+                plugins: { legend: { position: 'top' } }
             }
         });
     </script>
