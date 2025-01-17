@@ -1,13 +1,3 @@
-<?php
-session_start();
-
-// Verificar si la sesión está iniciada, si no, redirigir al login
-if (!isset($_SESSION['usuario'])) {
-    header('Location: index.php');
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,42 +20,64 @@ if (!isset($_SESSION['usuario'])) {
                 <li><a href="agregar_usuario.php"><i class="fas fa-user-plus"></i> Agregar Usuarios</a></li>
                 <li><a href="lista_usuarios.php"><i class="fas fa-users"></i> Listar Usuarios</a></li>
                 <li><a href="#"><i class="fas fa-cogs"></i> Configuración</a></li>
-                <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
             </ul>
         </aside>
         <main class="main-content">
-            <h1>Panel de Control</h1>
+            <h1><i class="fas fa-chart-pie"></i> Panel de Control</h1>
             <p>Información general de los usuarios registrados.</p>
-            <div class="dashboard-info">
-                <div class="info-card">
-                    <i class="fas fa-users"></i>
-                    <h2>Total de Usuarios</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <h2><i class="fas fa-users"></i> Total de Usuarios</h2>
                     <p>150</p>
                 </div>
-                <div class="info-card">
-                    <i class="fas fa-clipboard-list"></i>
-                    <h2>Planes Registrados</h2>
+                <div class="card">
+                    <h2><i class="fas fa-file-medical"></i> Planes Registrados</h2>
                     <p>Plan A, B, C</p>
                 </div>
             </div>
-            <canvas id="chart" width="400" height="200"></canvas>
+            <div class="chart-container">
+                <canvas id="userChart"></canvas>
+            </div>
         </main>
     </div>
+
     <script>
-        const ctx = document.getElementById('chart').getContext('2d');
-        const chart = new Chart(ctx, {
-            type: 'bar',
+        const ctx = document.getElementById('userChart').getContext('2d');
+        const userChart = new Chart(ctx, {
+            type: 'bar', // Cambiado a bar para mejor diseño
             data: {
                 labels: ['Plan A', 'Plan B', 'Plan C'],
                 datasets: [{
                     label: 'Usuarios por Plan',
-                    data: [50, 60, 40],
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                    data: [50, 70, 30],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
             }
         });
     </script>
