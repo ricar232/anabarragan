@@ -2,7 +2,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
-    background: url('../img/02.jpg') no-repeat center center fixed;
+    background: url('../img/05.jpg') no-repeat center center fixed;
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -14,10 +14,10 @@ body {
 
 /* Contenedor principal */
 .container {
-    background: rgba(0, 0, 0, 0.63);
+    background: rgba(255, 255, 255, 0.63);
     padding: 1.5rem;
     border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.801);
     width: 90%;
     max-width: 600px;
     max-height: 90vh;
