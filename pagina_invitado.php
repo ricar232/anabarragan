@@ -1,7 +1,11 @@
 <?php
 session_start();
-// Crear una sesión para invitados
-$_SESSION['invitado'] = true;
+
+// Validar que la sesión sea de invitado
+if (!isset($_SESSION['invitado'])) {
+    header("Location: login_invitado.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -10,13 +14,13 @@ $_SESSION['invitado'] = true;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Invitado</title>
-    <link rel="stylesheet" href="css/guest.css"> <!-- Estilos específicos para invitados -->
+    <link rel="stylesheet" href="css/guest_page.css"> <!-- Estilos para invitados -->
 </head>
 <body>
     <div class="guest-container">
         <h1>Bienvenido, Invitado</h1>
-        <p>Esta es una página exclusiva para invitados. Aquí puedes explorar contenido limitado.</p>
-        <a href="logout.php">Salir</a>
+        <p>Acceso exclusivo para invitados.</p>
+        <a href="logout.php">Cerrar Sesión</a>
     </div>
 </body>
 </html>

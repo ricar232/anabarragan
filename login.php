@@ -28,10 +28,8 @@
             <button type="submit">Iniciar Sesión</button>
         </form>
 
-        <!-- Botón para entrar como invitado -->
-        <form action="pagina_invitado.php" method="POST">
-            <button type="submit" class="guest-button">Entrar como Invitado</button>
-        </form>
+        <p>¿Eres un invitado? <a href="login_invitado.php">Accede aquí</a></p>
+
     </div>
 </body>
 </html>
