@@ -28,8 +28,19 @@
             <button type="submit">Iniciar Sesión</button>
         </form>
 
-        <p>¿Eres un invitado? <a href="login_invitado.php">Accede aquí</a></p>
-
+        <p>¿Eres un invitado? <a href="login_invitado.php" class="guest-link">Accede aquí</a></p>
     </div>
+
+    <script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+            const usuario = document.getElementById("usuario").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            if (!usuario || !password) {
+                event.preventDefault();
+                alert("Por favor, complete todos los campos.");
+            }
+        });
+    </script>
 </body>
 </html>
