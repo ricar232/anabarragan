@@ -1,3 +1,85 @@
+<?php
+require 'conexion.php';
+
+// Verificar si se recibió el ID del usuario a editar
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    try {
+        // Consultar los datos del usuario
+        $sql = "SELECT * FROM usuarios_registrados WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$usuario) {
+            die("Usuario no encontrado.");
+        }
+    } catch (PDOException $e) {
+        die("Error al consultar el usuario: " . $e->getMessage());
+    }
+} else {
+    header("Location: lista_usuarios.php");
+    exit();
+}
+
+// Guardar cambios si el formulario es enviado
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nombre = $_POST['nombre'];
+    $fecha_nacimiento = $_POST['fecha_nacimiento'];
+    $direccion = $_POST['direccion'];
+    $telefono = $_POST['telefono'];
+    $correo = $_POST['correo'];
+    $seguro_social = $_POST['seguro_social'];
+    $medicare = $_POST['medicare'];
+    $medicaid = $_POST['medicaid'];
+    $dr_primario = $_POST['dr_primario'];
+    $id_pcp = $_POST['id_pcp'];
+    $npi = $_POST['npi'];
+    $plan_medico = $_POST['plan_medico'];
+
+    try {
+        // Actualizar los datos del usuario
+        $sql = "UPDATE usuarios_registrados SET
+                nombre = :nombre,
+                fecha_nacimiento = :fecha_nacimiento,
+                direccion = :direccion,
+                telefono = :telefono,
+                correo = :correo,
+                seguro_social = :seguro_social,
+                medicare = :medicare,
+                medicaid = :medicaid,
+                dr_primario = :dr_primario,
+                id_pcp = :id_pcp,
+                npi = :npi,
+                plan_medico = :plan_medico
+                WHERE id = :id";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':nombre', $nombre);
+        $stmt->bindParam(':fecha_nacimiento', $fecha_nacimiento);
+        $stmt->bindParam(':direccion', $direccion);
+        $stmt->bindParam(':telefono', $telefono);
+        $stmt->bindParam(':correo', $correo);
+        $stmt->bindParam(':seguro_social', $seguro_social);
+        $stmt->bindParam(':medicare', $medicare);
+        $stmt->bindParam(':medicaid', $medicaid);
+        $stmt->bindParam(':dr_primario', $dr_primario);
+        $stmt->bindParam(':id_pcp', $id_pcp);
+        $stmt->bindParam(':npi', $npi);
+        $stmt->bindParam(':plan_medico', $plan_medico);
+        $stmt->bindParam(':id', $id);
+
+        $stmt->execute();
+        header("Location: lista_usuarios.php?updated=1");
+        exit();
+    } catch (PDOException $e) {
+        echo "Error al actualizar el usuario: " . $e->getMessage();
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,71 +87,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Usuario</title>
     <link rel="stylesheet" href="css/editar_usuario.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="main-container">
-        <div class="form-container">
-            <h1 class="title"><i class="fas fa-user-edit"></i> Editar Usuario</h1>
-            <?php if ($usuario): ?>
-                <form action="" method="POST" class="form">
-                    <div class="form-group">
-                        <label for="nombre"><i class="fas fa-user"></i> Nombre y Apellidos:</label>
-                        <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($usuario['nombre']); ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="fecha_nacimiento"><i class="fas fa-calendar-alt"></i> Fecha de Nacimiento:</label>
-                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="<?php echo htmlspecialchars($usuario['fecha_nacimiento']); ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="direccion"><i class="fas fa-map-marker-alt"></i> Dirección:</label>
-                        <input type="text" id="direccion" name="direccion" value="<?php echo htmlspecialchars($usuario['direccion']); ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="telefono"><i class="fas fa-phone"></i> Teléfono:</label>
-                        <input type="text" id="telefono" name="telefono" value="<?php echo htmlspecialchars($usuario['telefono']); ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="correo"><i class="fas fa-envelope"></i> Correo Electrónico:</label>
-                        <input type="email" id="correo" name="correo" value="<?php echo htmlspecialchars($usuario['correo']); ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="seguro_social"><i class="fas fa-id-card"></i> Seguro Social:</label>
-                        <input type="text" id="seguro_social" name="seguro_social" value="<?php echo htmlspecialchars($usuario['seguro_social']); ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="medicare"><i class="fas fa-hospital"></i> Medicare:</label>
-                        <input type="text" id="medicare" name="medicare" value="<?php echo htmlspecialchars($usuario['medicare']); ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="medicaid"><i class="fas fa-clinic-medical"></i> Medicaid:</label>
-                        <input type="text" id="medicaid" name="medicaid" value="<?php echo htmlspecialchars($usuario['medicaid']); ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="dr_primario"><i class="fas fa-user-md"></i> Nombre del Dr. Primario:</label>
-                        <input type="text" id="dr_primario" name="dr_primario" value="<?php echo htmlspecialchars($usuario['dr_primario']); ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="id_pcp"><i class="fas fa-id-badge"></i> ID PCP:</label>
-                        <input type="text" id="id_pcp" name="id_pcp" value="<?php echo htmlspecialchars($usuario['id_pcp']); ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="npi"><i class="fas fa-fingerprint"></i> NPI:</label>
-                        <input type="text" id="npi" name="npi" value="<?php echo htmlspecialchars($usuario['npi']); ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="plan_medico"><i class="fas fa-file-medical-alt"></i> Plan Médico:</label>
-                        <input type="text" id="plan_medico" name="plan_medico" value="<?php echo htmlspecialchars($usuario['plan_medico']); ?>">
-                    </div>
-                    <div class="form-buttons">
-                        <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Guardar Cambios</button>
-                        <a href="lista_usuarios.php" class="btn-cancel"><i class="fas fa-times"></i> Cancelar</a>
-                    </div>
-                </form>
-            <?php else: ?>
-                <p class="error-message">Usuario no encontrado.</p>
-            <?php endif; ?>
-        </div>
+    <div class="container">
+        <h1>Editar Usuario</h1>
+        <form action="" method="POST">
+            <label for="nombre">Nombre y Apellidos:</label>
+            <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($usuario['nombre']); ?>" required>
+
+            <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="<?php echo htmlspecialchars($usuario['fecha_nacimiento']); ?>" required>
+
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" value="<?php echo htmlspecialchars($usuario['direccion']); ?>">
+
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" name="telefono" value="<?php echo htmlspecialchars($usuario['telefono']); ?>">
+
+            <label for="correo">Correo Electrónico:</label>
+            <input type="email" id="correo" name="correo" value="<?php echo htmlspecialchars($usuario['correo']); ?>">
+
+            <label for="seguro_social">Seguro Social:</label>
+            <input type="text" id="seguro_social" name="seguro_social" value="<?php echo htmlspecialchars($usuario['seguro_social']); ?>">
+
+            <label for="medicare">Medicare:</label>
+            <input type="text" id="medicare" name="medicare" value="<?php echo htmlspecialchars($usuario['medicare']); ?>">
+
+            <label for="medicaid">Medicaid:</label>
+            <input type="text" id="medicaid" name="medicaid" value="<?php echo htmlspecialchars($usuario['medicaid']); ?>">
+
+            <label for="dr_primario">Nombre del Dr. Primario:</label>
+            <input type="text" id="dr_primario" name="dr_primario" value="<?php echo htmlspecialchars($usuario['dr_primario']); ?>">
+
+            <label for="id_pcp">ID PCP:</label>
+            <input type="text" id="id_pcp" name="id_pcp" value="<?php echo htmlspecialchars($usuario['id_pcp']); ?>">
+
+            <label for="npi">NPI:</label>
+            <input type="text" id="npi" name="npi" value="<?php echo htmlspecialchars($usuario['npi']); ?>">
+
+            <label for="plan_medico">Plan Médico:</label>
+            <input type="text" id="plan_medico" name="plan_medico" value="<?php echo htmlspecialchars($usuario['plan_medico']); ?>">
+
+            <button type="submit" class="save-button">Guardar Cambios</button>
+            <a href="lista_usuarios.php" class="back-button">Cancelar</a>
+        </form>
     </div>
 </body>
 </html>
