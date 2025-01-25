@@ -17,6 +17,7 @@
             <p class="error-message">Hubo un problema con la base de datos. Inténtalo más tarde.</p>
         <?php endif; ?>
 
+        <!-- Formulario de inicio de sesión -->
         <form action="validar_login.php" method="POST">
             <label for="usuario">Usuario:</label>
             <input type="text" name="usuario" id="usuario" placeholder="Ingresa tu usuario" required autofocus>
@@ -25,6 +26,11 @@
             <input type="password" name="password" id="password" placeholder="Ingresa tu contraseña" required>
             <br>
             <button type="submit">Iniciar Sesión</button>
+        </form>
+
+        <!-- Botón para entrar como invitado -->
+        <form action="pagina_invitado.php" method="POST">
+            <button type="submit" class="guest-button">Entrar como Invitado</button>
         </form>
     </div>
 </body>
