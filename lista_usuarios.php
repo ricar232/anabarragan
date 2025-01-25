@@ -57,8 +57,13 @@ $result = $conn->query($sql);
                             <td><?= htmlspecialchars($row['plan_medico']) ?></td>
                             <td>
                                 <!-- Botones de acciones -->
-                                <button class="btn-edit"><i class="fas fa-edit"></i></button>
-                                <button class="btn-delete"><i class="fas fa-trash-alt"></i></button>
+                                <a href="editar_usuario.php?id=<?= htmlspecialchars($row['id']) ?>" class="btn-edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="eliminar_usuario.php?id=<?= htmlspecialchars($row['id']) ?>" class="btn-delete" 
+                                   onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
                             </td>
                         </tr>
                     <?php endwhile; ?>
