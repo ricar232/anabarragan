@@ -27,6 +27,35 @@
             </div>
             <button type="submit" class="btn-login"><i class="fas fa-sign-in-alt"></i> Ingresar</button>
         </form>
+
+        <!-- Botón para invitados -->
+        <div class="guest-container">
+            <p>¿Eres un invitado?</p>
+            <a href="pagina_invitados.php" class="btn-guest"><i class="fas fa-user"></i> Entrar como Invitado</a>
+        </div>
     </div>
+
+    <style>
+        .guest-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn-guest {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-guest:hover {
+            background-color: #218838;
+        }
+    </style>
 </body>
 </html>
