@@ -1,27 +1,16 @@
 <?php
-// Incluye la conexión a la base de datos
 require 'conexion.php';
 
-// Inicializa un array para los meses
+// Código existente para gráficos y estadísticas
 $meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-
-// Consulta SQL para obtener la cantidad de usuarios registrados por mes
 $sql = "SELECT MONTH(fecha_registro) AS mes, COUNT(*) AS total FROM usuarios_registrados WHERE YEAR(fecha_registro) = YEAR(CURDATE()) GROUP BY mes";
 $result = $conn->query($sql);
-
-// Inicializa un array con valores 0 para todos los meses
 $usuariosPorMes = array_fill(0, 12, 0);
-
-// Procesa los resultados de la consulta
 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     $usuariosPorMes[$row['mes'] - 1] = $row['total'];
 }
-
-// Consulta SQL para obtener los planes médicos y el número de usuarios
 $sql_planes = "SELECT plan_medico, COUNT(*) AS total FROM usuarios_registrados GROUP BY plan_medico";
 $result_planes = $conn->query($sql_planes);
-
-// Procesa los resultados para los planes médicos
 $planes = [];
 while ($row = $result_planes->fetch(PDO::FETCH_ASSOC)) {
     $planes[] = [
@@ -50,46 +39,69 @@ while ($row = $result_planes->fetch(PDO::FETCH_ASSOC)) {
                 <span>Admin Panel</span>
             </div>
             <ul>
-                <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
-                <li><a href="agregar_usuario.php"><i class="fas fa-user-plus"></i> Agregar Usuarios</a></li>
-                <li><a href="lista_usuarios.php"><i class="fas fa-users"></i> Listar Usuarios</a></li>
-                <li><a href="#"><i class="fas fa-cogs"></i> Configuración</a></li>
+                <li><a href="dashboard.php"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="dashboard.php?seccion=agregar"><i class="fas fa-user-plus"></i> Agregar Usuarios</a></li>
+                <li><a href="dashboard.php?seccion=listar"><i class="fas fa-users"></i> Listar Usuarios</a></li>
+                <li><a href="dashboard.php?seccion=configuracion"><i class="fas fa-cogs"></i> Configuración</a></li>
                 <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
             </ul>
         </aside>
 
         <!-- Contenido principal -->
         <main class="main-content">
-            <header>
-                <h1><i class="fas fa-chart-pie"></i> Seguro Ana Barragan <?php echo date('Y'); ?></h1>
-                <p>Resumen general de los datos registrados.</p>
-            </header>
+            <?php
+            if (isset($_GET['seccion'])) {
+                $seccion = $_GET['seccion'];
 
-            <section class="info-cards">
-                <div class="card">
-                    <h2><i class="fas fa-users"></i> Total de Usuarios</h2>
-                    <p><?php echo array_sum($usuariosPorMes); ?></p>
-                </div>
-                <div class="card">
-                    <h2><i class="fas fa-file-medical"></i> Planes Activos</h2>
-                    <p>
-                        <?php
-                        foreach ($planes as $plan) {
-                            echo htmlspecialchars($plan['plan']) . " ({$plan['total']}), ";
-                        }
-                        ?>
-                    </p>
-                </div>
-            </section>
+                // Agregar usuarios
+                if ($seccion === 'agregar') {
+                    include 'agregar_usuario.php';
+                }
+                // Listar usuarios
+                elseif ($seccion === 'listar') {
+                    include 'lista_usuarios.php';
+                }
+                // Configuración (Cambiar contraseña o eliminar usuarios)
+                elseif ($seccion === 'configuracion') {
+                    include 'configuracion.php';
+                } else {
+                    echo "<h2>Sección no encontrada</h2>";
+                }
+            } else {
+                ?>
+                <header>
+                    <h1><i class="fas fa-chart-pie"></i> Seguro Ana Barragan <?php echo date('Y'); ?></h1>
+                    <p>Resumen general de los datos registrados.</p>
+                </header>
 
-            <section class="charts">
-                <div class="chart-container">
-                    <canvas id="lineChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <canvas id="barChart"></canvas>
-                </div>
-            </section>
+                <section class="info-cards">
+                    <div class="card">
+                        <h2><i class="fas fa-users"></i> Total de Usuarios</h2>
+                        <p><?php echo array_sum($usuariosPorMes); ?></p>
+                    </div>
+                    <div class="card">
+                        <h2><i class="fas fa-file-medical"></i> Planes Activos</h2>
+                        <p>
+                            <?php
+                            foreach ($planes as $plan) {
+                                echo htmlspecialchars($plan['plan']) . " ({$plan['total']}), ";
+                            }
+                            ?>
+                        </p>
+                    </div>
+                </section>
+
+                <section class="charts">
+                    <div class="chart-container">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </section>
+                <?php
+            }
+            ?>
         </main>
     </div>
 
