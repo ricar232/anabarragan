@@ -14,10 +14,10 @@ body {
 
 /* Contenedor principal */
 .container {
-    background: rgba(255, 255, 255, 0.63);
+    background: rgba(255, 255, 255, 0.767);
     padding: 1.5rem;
     border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.801);
+    box-shadow: 0 4px 10px rgb(0, 0, 0);
     width: 90%;
     max-width: 600px;
     max-height: 90vh;
