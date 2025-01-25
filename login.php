@@ -28,19 +28,33 @@
             <button type="submit">Iniciar Sesión</button>
         </form>
 
-        <p>¿Eres un invitado? <a href="login_invitado.php" class="guest-link">Accede aquí</a></p>
+        <!-- Botón para invitados -->
+        <div class="guest-login">
+            <p>¿Eres un invitado?</p>
+            <a href="pagina_invitados.php" class="guest-button">Entrar como Invitado</a>
+        </div>
     </div>
 
-    <script>
-        document.querySelector("form").addEventListener("submit", function(event) {
-            const usuario = document.getElementById("usuario").value.trim();
-            const password = document.getElementById("password").value.trim();
+    <style>
+        .guest-login {
+            margin-top: 20px;
+            text-align: center;
+        }
 
-            if (!usuario || !password) {
-                event.preventDefault();
-                alert("Por favor, complete todos los campos.");
-            }
-        });
-    </script>
+        .guest-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .guest-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </body>
 </html>
