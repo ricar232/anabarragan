@@ -7,98 +7,120 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    color: #333;
 }
 
 /* Contenedor principal */
-.main-container {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 1.5rem;
-    border-radius: 10px;
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     width: 90%;
     max-width: 500px;
+    animation: fadeIn 0.5s ease;
 }
 
 /* Título */
-.title {
-    font-size: 1.5rem;
-    color: #4A47A3;
+h1 {
     text-align: center;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+    color: #4A47A3;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
 }
 
 /* Formulario */
 form {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 1rem;
 }
 
+/* Etiquetas */
 label {
     font-weight: bold;
     font-size: 0.9rem;
+    margin-bottom: 0.3rem;
     color: #333;
 }
 
-input {
-    padding: 0.6rem;
+/* Campos de entrada */
+input[type="text"],
+input[type="email"],
+input[type="date"] {
+    padding: 0.8rem;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 0.9rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 input:focus {
     border-color: #6a11cb;
-    box-shadow: 0 0 4px rgba(106, 17, 203, 0.5);
+    box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+    outline: none;
 }
 
 /* Botones */
-.form-buttons {
-    display: flex;
-    justify-content: space-between;
-}
-
-.btn-save, .btn-cancel {
-    padding: 0.6rem 1.2rem;
-    border-radius: 5px;
+button.save-button,
+a.back-button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
     border: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.2s ease;
+    text-align: center;
+    display: inline-block;
+    transition: all 0.3s ease;
 }
 
-.btn-save {
+button.save-button {
     background-color: #4A47A3;
     color: white;
 }
 
-.btn-cancel {
-    background-color: #E91E63;
-    color: white;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-save:hover {
-    transform: scale(1.05);
+button.save-button:hover {
     background-color: #333399;
 }
 
-.btn-cancel:hover {
-    transform: scale(1.05);
-    background-color: #D81B60;
+a.back-button {
+    background-color: #e91e63;
+    color: white;
+    text-decoration: none;
+    margin-top: 1rem;
 }
 
-/* Mensaje de error */
-.error-message {
-    text-align: center;
-    font-size: 1rem;
-    color: #e91e63;
+a.back-button:hover {
+    background-color: #d81b60;
+}
+
+/* Efectos */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    input,
+    button {
+        font-size: 0.85rem;
+    }
 }
