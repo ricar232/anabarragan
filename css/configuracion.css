@@ -1,105 +1,89 @@
-/* Contenedor Principal */
+/* General */
 .config-container {
     padding: 20px;
-    background-color: #f4f5f7;
+    background-color: #f9f9f9;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Títulos */
-.config-container h2, .config-container h3 {
+.config-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
     color: #333;
-    font-family: 'Arial', sans-serif;
-    margin-bottom: 15px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-/* Lista de Usuarios */
+.mensaje {
+    color: green;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Usuarios Actuales */
 .usuarios-list ul {
     list-style: none;
     padding: 0;
 }
 
 .usuarios-list li {
-    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
     padding: 10px;
-    background: #fff;
+    margin-bottom: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-}
-
-.usuarios-list li i {
-    color: #007bff;
 }
 
 .btn-delete {
-    background-color: #ff4d4f;
-    color: white;
-    border: none;
+    background-color: #e74c3c;
+    color: #fff;
     padding: 5px 10px;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .btn-delete:hover {
-    background-color: #d9363e;
+    background-color: #c0392b;
 }
 
 /* Formularios */
 .form-container {
     margin-top: 20px;
-    padding: 15px;
-    background-color: #fff;
+    background: #fff;
+    padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-container label {
     font-weight: bold;
-    display: block;
     margin-top: 10px;
+    display: block;
 }
 
 .form-container input, .form-container select {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
-    border: 1px solid #ddd;
     border-radius: 5px;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
 }
 
-.form-container input:focus, .form-container select:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-/* Botones */
-.btn-add, .btn-update {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
+.form-container button {
     margin-top: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-.btn-add:hover, .btn-update:hover {
-    background-color: #0056b3;
-}
-
-/* General */
-.success {
-    color: green;
-    font-weight: bold;
-    margin-top: 10px;
+.form-container button:hover {
+    background-color: #2980b9;
 }
