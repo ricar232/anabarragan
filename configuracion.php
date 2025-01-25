@@ -1,11 +1,6 @@
 <?php
 require 'conexion.php';
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-
 // Obtener todos los usuarios que tienen acceso al sistema
 $sql = "SELECT id, usuario FROM usuarios";
 $stmt = $conn->query($sql);
@@ -18,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user_id = $_POST['user_id'];
         $new_password = password_hash($_POST['new_password'], PASSWORD_BCRYPT);
 
-        $sql_update = "UPDATE usuarios SET password = :password WHERE id = :id";
+        $sql_update = "UPDATE usuarios SET contrasena = :password WHERE id = :id";
         $stmt = $conn->prepare($sql_update);
         $stmt->bindParam(':password', $new_password);
         $stmt->bindParam(':id', $user_id);
@@ -30,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $nuevo_usuario = $_POST['nuevo_usuario'];
         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-        $sql_insert = "INSERT INTO usuarios (usuario, password) VALUES (:usuario, :password)";
+        $sql_insert = "INSERT INTO usuarios (usuario, contrasena) VALUES (:usuario, :password)";
         $stmt = $conn->prepare($sql_insert);
         $stmt->bindParam(':usuario', $nuevo_usuario);
         $stmt->bindParam(':password', $password);
@@ -48,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $mensaje = "Usuario eliminado correctamente.";
     }
 
-    // Recargar la lista de usuarios después de cualquier cambio ok
+    // Recargar la lista de usuarios después de cualquier cambio
     $stmt = $conn->query($sql);
     $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
