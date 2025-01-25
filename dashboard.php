@@ -61,7 +61,7 @@ while ($row = $result_planes->fetch(PDO::FETCH_ASSOC)) {
         <!-- Contenido principal -->
         <main class="main-content">
             <header>
-                <h1><i class="fas fa-chart-pie"></i> Panel de Control - Año <?php echo date('Y'); ?></h1>
+                <h1><i class="fas fa-chart-pie"></i> Seguro Ana Barragan <?php echo date('Y'); ?></h1>
                 <p>Resumen general de los datos registrados.</p>
             </header>
 
