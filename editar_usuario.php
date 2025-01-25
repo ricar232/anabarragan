@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Usuario</title>
+    <!-- Estilos externos -->
     <link rel="stylesheet" href="css/editar_usuario.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -11,7 +12,7 @@
     <div class="main-container">
         <div class="form-container">
             <h1 class="title"><i class="fas fa-user-edit"></i> Editar Usuario</h1>
-            <form action="" method="POST" class="form">
+            <form action="" method="POST">
                 <div class="form-group">
                     <label for="nombre"><i class="fas fa-user"></i> Nombre y Apellidos:</label>
                     <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($usuario['nombre']); ?>" required>
@@ -22,19 +23,19 @@
                 </div>
                 <div class="form-group">
                     <label for="direccion"><i class="fas fa-map-marker-alt"></i> Dirección:</label>
-                    <input type="text" id="direccion" name="direccion" value="<?php echo htmlspecialchars($usuario['direccion']); ?>" required>
+                    <input type="text" id="direccion" name="direccion" value="<?php echo htmlspecialchars($usuario['direccion']); ?>">
                 </div>
                 <div class="form-group">
                     <label for="telefono"><i class="fas fa-phone"></i> Teléfono:</label>
-                    <input type="text" id="telefono" name="telefono" value="<?php echo htmlspecialchars($usuario['telefono']); ?>" required>
+                    <input type="text" id="telefono" name="telefono" value="<?php echo htmlspecialchars($usuario['telefono']); ?>">
                 </div>
                 <div class="form-group">
                     <label for="correo"><i class="fas fa-envelope"></i> Correo Electrónico:</label>
-                    <input type="email" id="correo" name="correo" value="<?php echo htmlspecialchars($usuario['correo']); ?>" required>
+                    <input type="email" id="correo" name="correo" value="<?php echo htmlspecialchars($usuario['correo']); ?>">
                 </div>
                 <div class="form-group">
                     <label for="seguro_social"><i class="fas fa-id-card"></i> Seguro Social:</label>
-                    <input type="text" id="seguro_social" name="seguro_social" value="<?php echo htmlspecialchars($usuario['seguro_social']); ?>" required>
+                    <input type="text" id="seguro_social" name="seguro_social" value="<?php echo htmlspecialchars($usuario['seguro_social']); ?>">
                 </div>
                 <div class="form-group">
                     <label for="medicare"><i class="fas fa-hospital"></i> Medicare:</label>

@@ -1,7 +1,7 @@
-/* Fondo */
+/* Fondo general */
 body {
-    margin: 0;
     font-family: 'Poppins', sans-serif;
+    margin: 0;
     background: linear-gradient(135deg, #6a11cb, #2575fc);
     display: flex;
     justify-content: center;
@@ -11,23 +11,23 @@ body {
 
 /* Contenedor principal */
 .main-container {
-    width: 100%;
-    max-width: 600px;
-    padding: 2rem;
     background: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 600px;
 }
 
 /* Título */
 .title {
-    text-align: center;
-    color: #4A47A3;
     font-size: 1.8rem;
-    margin-bottom: 1.5rem;
+    color: #4A47A3;
+    text-align: center;
+    margin-bottom: 1rem;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
 }
 
@@ -43,16 +43,16 @@ body {
     flex-direction: column;
 }
 
-.form-group label {
+label {
     font-weight: bold;
+    margin-bottom: 0.5rem;
     color: #333;
-    margin-bottom: 0.3rem;
 }
 
-input[type="text"], input[type="email"], input[type="date"] {
+input {
     padding: 0.8rem;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 5px;
     font-size: 1rem;
     transition: all 0.3s ease;
 }
@@ -66,7 +66,6 @@ input:focus {
 .form-buttons {
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
 }
 
 .btn-submit, .btn-cancel {
@@ -89,16 +88,16 @@ input:focus {
     color: white;
     text-decoration: none;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 
 .btn-submit:hover {
+    transform: translateY(-2px);
     background-color: #2575fc;
-    transform: scale(1.05);
 }
 
 .btn-cancel:hover {
+    transform: translateY(-2px);
     background-color: #d81b60;
-    transform: scale(1.05);
 }
