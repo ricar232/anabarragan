@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $mensaje = "Usuario eliminado correctamente.";
     }
 
-    // Recargar la lista de usuarios después de cualquier cambio
+    // Recargar la lista de usuarios después de cualquier cambio ok
     $stmt = $conn->query($sql);
     $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
