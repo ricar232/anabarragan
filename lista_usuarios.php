@@ -60,7 +60,7 @@ $result = $conn->query($sql);
                                 <a href="editar_usuario.php?id=<?= htmlspecialchars($row['id']) ?>" class="btn-edit">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="eliminar_usuario.php?id=<?= htmlspecialchars($row['id']) ?>" class="btn-delete" 
+                                <a href="borrar_usuario.php?id=<?= htmlspecialchars($row['id']) ?>" class="btn-delete" 
                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
