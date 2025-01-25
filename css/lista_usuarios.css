@@ -6,7 +6,6 @@ body {
     margin: 0;
     padding: 0;
     color: #333;
-    overflow-x: hidden;
 }
 
 .container {
@@ -17,42 +16,25 @@ body {
     padding: 3rem;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    overflow-x: auto; /* Scroll horizontal para todo el contenido */
 }
 
 .title {
     text-align: center;
     color: #4A47A3;
-    font-size: 2.8rem;
-    margin-bottom: 2.5rem;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
-    animation: fadeIn 1s ease-out;
 }
 
 /* Tabla */
-.table-container {
-    overflow-x: auto; /* Agregar desplazamiento horizontal */
-    margin-bottom: 2rem;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
 table {
     width: 100%;
     border-collapse: collapse;
     text-align: center;
-    font-size: 0.95rem;
-    min-width: 1000px; /* Mínimo para scroll horizontal */
-    animation: slideIn 1s ease-out;
+    min-width: 1200px; /* Forzar scroll horizontal si la tabla es muy grande */
 }
 
 thead {
@@ -64,27 +46,24 @@ thead th {
     padding: 1rem;
     text-align: center;
     font-weight: bold;
-    font-size: 1rem;
-    white-space: nowrap;
+    font-size: 0.9rem;
 }
 
 tbody tr {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-}
-
-tbody tr:hover {
-    background-color: rgba(74, 71, 163, 0.1);
 }
 
 tbody td {
     padding: 0.8rem;
     text-align: center;
-    word-wrap: break-word;
-    white-space: nowrap; /* Evitar texto cortado */
-    overflow: hidden;
-    text-overflow: ellipsis;
     font-size: 0.9rem;
+    white-space: normal; /* Permitir que el texto se ajuste */
+    word-wrap: break-word;
+}
+
+/* Scroll horizontal */
+.container {
+    overflow-x: auto; /* Permitir el desplazamiento horizontal */
 }
 
 /* Botones de acción */
@@ -128,43 +107,24 @@ tbody td {
 
 /* Responsividad */
 @media (max-width: 1024px) {
-    .container {
-        padding: 2rem;
-    }
-
-    .title {
-        font-size: 2.2rem;
-    }
-
     table {
         font-size: 0.85rem;
     }
 
     thead th, tbody td {
-        padding: 0.6rem;
+        padding: 0.5rem;
     }
 
-    .table-container {
-        overflow-x: auto; /* Desplazamiento horizontal en pantallas más pequeñas */
+    .title {
+        font-size: 2rem;
     }
 }
 
 @media (max-width: 768px) {
-    .container {
-        padding: 1.5rem;
-    }
-
-    .title {
-        font-size: 1.8rem;
-    }
-
-    .table-container {
-        overflow-x: auto; /* Scroll horizontal */
-    }
-
     table {
         font-size: 0.8rem;
         display: block;
+        overflow-x: auto;
     }
 
     thead th, tbody td {
@@ -176,28 +136,5 @@ tbody td {
         width: 100%;
         text-align: center;
         margin-top: 1rem;
-    }
-}
-
-/* Animaciones */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
     }
 }
