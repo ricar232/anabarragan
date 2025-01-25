@@ -31,7 +31,7 @@
         <!-- Botón para invitados -->
         <div class="guest-login">
             <p>¿Eres un invitado?</p>
-            <a href="pagina_invitados.php" class="guest-button">Entrar como Invitado</a>
+            <a href="pagina_invitado.php" class="guest-button">Entrar como Invitado</a>
         </div>
     </div>
 
