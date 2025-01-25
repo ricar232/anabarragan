@@ -1,6 +1,11 @@
 <?php
 require 'conexion.php';
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 // Obtener todos los usuarios que tienen acceso al sistema
 $sql = "SELECT id, usuario FROM usuarios";
 $stmt = $conn->query($sql);
