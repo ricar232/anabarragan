@@ -1,24 +1,7 @@
-<?php
-require 'conexion.php';
-
-// Recuperar los usuarios de la base de datos
-$sql = "SELECT id, nombre, fecha_nacimiento, direccion, telefono, correo, seguro_social, medicare, medicaid, dr_primario, id_pcp, npi, plan_medico 
-        FROM usuarios_registrados";
-$result = $conn->query($sql);
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Usuarios Registrados</title>
-    <link rel="stylesheet" href="css/lista_usuarios.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-    <div class="container">
-        <h1 class="title"><i class="fas fa-users"></i> Lista de Usuarios Registrados</h1>
+<div class="container">
+    <h1 class="title"><i class="fas fa-users"></i> Lista de Usuarios Registrados</h1>
+    <!-- Contenedor con scroll horizontal -->
+    <div class="table-container">
         <table>
             <thead>
                 <tr>
@@ -74,7 +57,6 @@ $result = $conn->query($sql);
                 <?php endif; ?>
             </tbody>
         </table>
-        <a href="dashboard.php" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Dashboard</a>
     </div>
-</body>
-</html>
+    <a href="dashboard.php" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Dashboard</a>
+</div>
