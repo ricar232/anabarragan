@@ -3,7 +3,7 @@ session_start();
 
 // Validar que la sesión sea de invitado
 if (!isset($_SESSION['invitado'])) {
-    header("Location: login_invitado.php");
+    header("Location: login.php");
     exit();
 }
 ?>
