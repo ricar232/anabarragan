@@ -1,93 +1,48 @@
-/* styles.css - Versión Final con Logo Corporativo */
+/* styles.css - Versión Final Mejorada */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Configuración General */
 body, html {
     height: 100%;
     width: 100%;
     font-family: 'Poppins', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+    overflow: auto;
     position: relative;
-}
-
-/* Capa de Fondo Principal */
-body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     background: url('../img/background01.jpg') no-repeat center center/cover;
-    z-index: -3;
-    filter: brightness(0.85) contrast(1.1);
 }
 
-/* Logo Corporativo en el Fondo */
+/* Logo Superior Fijo */
 body::before {
     content: '';
     position: fixed;
-    width: 400px;
-    height: 400px;
-    background: url('../img/icono.jpg') no-repeat center center/cover;
-    border-radius: 50%;
-    opacity: 0.1;
-    z-index: -1;
-    top: 50%;
+    width: 100px;
+    height: 100px;
+    background: url('../img/icono.jpg') no-repeat center center/contain;
+    z-index: 1000;
+    top: 30px;
     left: 50%;
-    transform: translate(-50%, -50%);
-    filter: drop-shadow(0 0 25px rgba(0, 0, 0, 0.15));
-    animation: logoFloat 8s ease-in-out infinite;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
+    animation: logoEntrada 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
-/* Contenedor Principal del Login */
+/* Contenedor Principal */
 .login-container {
     background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(18px);
+    backdrop-filter: blur(15px);
     padding: 2.5rem;
-    border-radius: 20px;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    border-radius: 18px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
     width: 90%;
     max-width: 420px;
-    text-align: center;
+    margin: 150px auto 0;
     position: relative;
     z-index: 1;
-    animation: fadeIn 1.2s cubic-bezier(0.23, 1, 0.32, 1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Icono del Encabezado */
-.header-icon {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid rgba(255, 255, 255, 0.35);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
-    margin-bottom: 1.8rem;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.header-icon:hover {
-    transform: rotate(12deg) scale(1.08);
-    filter: brightness(1.05);
-}
-
-/* Título Principal */
-h1 {
-    font-size: 2.2rem;
-    color: rgba(0, 0, 0, 0.85);
-    margin-bottom: 2.2rem;
-    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.25);
-    letter-spacing: -0.5px;
-    font-weight: 600;
+    animation: contenedorEntrada 0.6s ease-out 0.3s both;
+    border: 1.5px solid rgba(255,255,255,0.15);
 }
 
 /* Campos de Entrada */
@@ -98,161 +53,117 @@ h1 {
 
 label {
     display: block;
-    margin-bottom: 0.6rem;
-    color: rgba(0, 0, 0, 0.75);
+    margin-bottom: 0.8rem;
+    color: rgba(0,0,0,0.8);
     font-size: 0.95rem;
     font-weight: 500;
-    padding-left: 0.3rem;
+    padding-left: 0.5rem;
 }
 
 input {
     width: 100%;
-    padding: 0.9rem 1.2rem;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.25);
-    color: rgba(0, 0, 0, 0.85);
+    padding: 1rem 1.5rem;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.25);
+    color: rgba(0,0,0,0.85);
     font-size: 1rem;
     transition: all 0.3s ease;
-    backdrop-filter: blur(4px);
-}
-
-input::placeholder {
-    color: rgba(0, 0, 0, 0.5);
-    opacity: 0.8;
+    backdrop-filter: blur(5px);
 }
 
 input:focus {
     outline: none;
     border-color: #4a90e2;
-    background: rgba(255, 255, 255, 0.35);
-    box-shadow: 0 0 12px rgba(74, 144, 226, 0.25);
+    background: rgba(255,255,255,0.35);
+    box-shadow: 0 0 15px rgba(74,144,226,0.25);
 }
 
 /* Botones */
 .btn-login {
     width: 100%;
-    padding: 1rem;
-    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    padding: 1.1rem;
+    background: linear-gradient(135deg, #4a90e2, #357abd);
     color: white;
     border: none;
-    border-radius: 10px;
-    font-size: 1.05rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 1.2rem;
+    margin-top: 1.5rem;
     letter-spacing: 0.5px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .btn-login:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    filter: brightness(1.05);
-}
-
-.btn-guest {
-    width: 100%;
-    padding: 1rem;
-    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.05rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 1.8rem;
-    letter-spacing: 0.5px;
-    font-weight: 500;
-}
-
-.btn-guest:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    filter: brightness(1.05);
-}
-
-/* Sección Invitado */
-.guest-container {
-    margin-top: 2.5rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.guest-container p {
-    color: rgba(0, 0, 0, 0.75);
-    font-size: 0.95rem;
-    margin-bottom: 1.2rem;
-    font-weight: 400;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
 /* Animaciones */
-@keyframes fadeIn {
+@keyframes logoEntrada {
+    from {
+        transform: translate(-50%, -50px);
+        opacity: 0;
+        scale: 0.8;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+@keyframes contenedorEntrada {
     from {
         opacity: 0;
-        transform: translateY(25px) scale(0.98);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateY(0);
     }
 }
 
-@keyframes logoFloat {
-    0%, 100% {
-        transform: translate(-50%, -50%) scale(1) rotate(0deg);
-    }
-    50% {
-        transform: translate(-50%, -54%) scale(1.03) rotate(3deg);
-    }
-}
-
-/* Diseño Responsivo */
+/* Responsive Design */
 @media (max-width: 768px) {
     body::before {
-        width: 300px;
-        height: 300px;
+        width: 80px;
+        height: 80px;
+        top: 20px;
     }
-
+    
     .login-container {
+        margin-top: 130px;
         padding: 2rem;
         max-width: 380px;
     }
-
-    .header-icon {
-        width: 80px;
-        height: 80px;
-    }
-
-    h1 {
-        font-size: 2rem;
+    
+    input {
+        padding: 0.9rem 1.2rem;
     }
 }
 
 @media (max-width: 480px) {
     body::before {
-        width: 220px;
-        height: 220px;
-        opacity: 0.08;
+        width: 70px;
+        height: 70px;
+        top: 15px;
     }
-
+    
     .login-container {
+        margin-top: 110px;
         padding: 1.5rem;
         border-radius: 15px;
     }
-
-    .header-icon {
-        width: 70px;
-        height: 70px;
+    
+    .btn-login {
+        padding: 1rem;
+        font-size: 1rem;
     }
-
-    h1 {
-        font-size: 1.7rem;
-        margin-bottom: 1.8rem;
-    }
-
-    input, .btn-login, .btn-guest {
-        padding: 0.85rem;
+    
+    input {
+        padding: 0.8rem 1rem;
         font-size: 0.95rem;
     }
 }
