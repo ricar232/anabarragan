@@ -1,9 +1,12 @@
-/* styles.css - Código completo mejorado */
-
-/* Configuración general */
-body, html {
+/* styles.css - Versión Final Funcional */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+/* Configuración General */
+body, html {
     height: 100%;
     width: 100%;
     font-family: 'Poppins', sans-serif;
@@ -11,11 +14,22 @@ body, html {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    background: url('../img/background01.jpg') no-repeat center center/cover;
     position: relative;
 }
 
-/* Texto decorativo de fondo */
+/* Capa de Fondo con Imagen */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../img/background01.jpg') no-repeat center center/cover;
+    z-index: -2;
+}
+
+/* Texto Decorativo Flotante */
 body::before {
     content: "# Iniciar Sesión \A ## 1. Usuario \A - Ingresa tu usuario \A ## 2. Contraseña \A - Ingresa tu contraseña \A ### 1) Ingresar \A ¿Eres un invitado? \A ## 2. Acceder como Invitado";
     white-space: pre;
@@ -25,7 +39,7 @@ body::before {
     transform: translateX(-50%) rotate(-5deg);
     font-size: 1.8rem;
     color: rgba(255, 255, 255, 0.15);
-    z-index: 0;
+    z-index: -1;
     font-weight: 700;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     pointer-events: none;
@@ -33,127 +47,108 @@ body::before {
     animation: float 6s ease-in-out infinite;
 }
 
-/* Contenedor principal del login */
+/* Contenedor Principal del Login */
 .login-container {
     background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(15px);
     padding: 2rem;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.863);
-    text-align: center;
-    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     width: 90%;
-    animation: fadeIn 1s ease-in-out;
+    max-width: 400px;
+    text-align: center;
     position: relative;
     z-index: 1;
+    animation: fadeIn 1s ease-out;
 }
 
-/* Icono del encabezado */
-.login-header .header-icon {
+/* Icono del Encabezado */
+.header-icon {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     transition: transform 0.3s ease;
 }
 
-.login-header .header-icon:hover {
-    transform: rotate(15deg) scale(1.1);
+.header-icon:hover {
+    transform: rotate(10deg) scale(1.1);
 }
 
-/* Título principal */
-.login-header h1 {
+/* Título Principal */
+h1 {
     font-size: 2rem;
-    margin: 0 0 1.5rem 0;
-    color: #000000bd;
-    letter-spacing: -0.5px;
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 2rem;
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2);
 }
 
-/* Campos de entrada */
+/* Campos de Entrada */
 .input-container {
     margin-bottom: 1.5rem;
     text-align: left;
 }
 
-.input-container label {
-    font-weight: 500;
+label {
     display: block;
     margin-bottom: 0.5rem;
-    color: #000000be;
-    font-size: 0.95rem;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
-.input-container input {
+input {
     width: 100%;
     padding: 0.8rem;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
-    font-size: 1rem;
     background: rgba(255, 255, 255, 0.2);
-    color: #000000bd;
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 1rem;
     transition: all 0.3s ease;
 }
 
-.input-container input:focus {
+input:focus {
+    outline: none;
     border-color: #4a90e2;
     background: rgba(255, 255, 255, 0.3);
-    outline: none;
     box-shadow: 0 0 8px rgba(74, 144, 226, 0.2);
 }
 
 /* Botones */
 .btn-login {
+    width: 100%;
+    padding: 0.9rem;
     background: #4a90e2;
-    color: #ffffff;
-    padding: 0.9rem 1rem;
+    color: white;
     border: none;
     border-radius: 8px;
-    cursor: pointer;
     font-size: 1rem;
-    width: 100%;
-    font-weight: 500;
+    cursor: pointer;
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    margin-top: 1rem;
 }
 
 .btn-login:hover {
-    background: #357ab8;
+    background: #357abd;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.btn-login::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: rgba(255, 255, 255, 0.1);
-    transform: rotate(45deg);
-    transition: all 0.5s ease;
-}
-
-.btn-login:hover::after {
-    left: 120%;
-}
-
 .btn-guest {
+    width: 100%;
+    padding: 0.9rem;
     background: #28a745;
-    color: #ffffff;
-    padding: 0.9rem 1rem;
+    color: white;
     border: none;
     border-radius: 8px;
-    cursor: pointer;
     font-size: 1rem;
-    width: 100%;
-    margin-top: 1rem;
+    cursor: pointer;
     transition: all 0.3s ease;
+    margin-top: 1.5rem;
 }
 
 .btn-guest:hover {
@@ -162,7 +157,7 @@ body::before {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Sección invitado */
+/* Sección Invitado */
 .guest-container {
     margin-top: 2rem;
     padding-top: 1.5rem;
@@ -170,46 +165,74 @@ body::before {
 }
 
 .guest-container p {
-    color: #000000be;
+    color: rgba(0, 0, 0, 0.7);
     font-size: 0.9rem;
     margin-bottom: 1rem;
 }
 
 /* Animaciones */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes float {
-    0% { transform: translateX(-50%) rotate(-5deg) translateY(0); }
-    50% { transform: translateX(-50%) rotate(-5deg) translateY(-20px); }
-    100% { transform: translateX(-50%) rotate(-5deg) translateY(0); }
+    0%, 100% {
+        transform: translateX(-50%) rotate(-5deg) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) rotate(-5deg) translateY(-20px);
+    }
 }
 
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25%, 75% { transform: translateX(-8px); }
-    50% { transform: translateX(8px); }
-}
-
-/* Media Queries */
+/* Responsive Design */
 @media (max-width: 768px) {
-    .login-container { padding: 1.5rem; }
-    .login-header .header-icon { width: 70px; height: 70px; }
-    .login-header h1 { font-size: 1.8rem; }
-    body::before { font-size: 1.4rem; }
-    .input-container input, 
-    .btn-login, 
-    .btn-guest { padding: 0.8rem; }
+    body::before {
+        font-size: 1.4rem;
+        top: 15%;
+    }
+
+    .login-container {
+        padding: 1.5rem;
+    }
+
+    .header-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
 }
 
 @media (max-width: 480px) {
-    .login-container { padding: 1.2rem; }
-    .login-header .header-icon { width: 60px; height: 60px; }
-    .login-header h1 { font-size: 1.6rem; }
-    body::before { font-size: 1.2rem; top: 15%; }
-    .input-container input, 
-    .btn-login, 
-    .btn-guest { font-size: 0.9rem; padding: 0.7rem; }
+    body::before {
+        font-size: 1.1rem;
+        top: 10%;
+    }
+
+    .login-container {
+        padding: 1rem;
+    }
+
+    .header-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    input, .btn-login, .btn-guest {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
 }
