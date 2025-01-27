@@ -55,7 +55,7 @@ body, html {
 /* Centrar la caja del login */
 .login-container {
     margin-top: 50px; /* Ajusta para centrar mejor */
-    background: rgba(245, 195, 241, 0.575); /* Fondo un poco más opaco */
+    background: rgba(248, 214, 245, 0.473); /* Fondo un poco más opaco */
     padding: 2.5rem;
     border-radius: 20px; /* Más redondeado */
     box-shadow: 0 10px 25px rgb(0, 0, 0);
