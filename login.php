@@ -37,8 +37,8 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -47,23 +47,24 @@
         }
 
         .login-container {
-            background-color: white;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             width: 100%;
             max-width: 400px;
+            text-align: center;
         }
 
         h1 {
-            text-align: center;
+            font-size: 24px;
             margin-bottom: 20px;
             color: #333;
         }
 
         .error-message {
             color: red;
-            text-align: center;
             margin-bottom: 10px;
         }
 
@@ -85,40 +86,45 @@
 
         button {
             width: 100%;
-            padding: 10px;
-            background-color: #007bff;
+            padding: 12px;
+            background: linear-gradient(135deg, #4a90e2, #357abd);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         button:hover {
-            background-color: #0056b3;
+            background: linear-gradient(135deg, #357abd, #4a90e2);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
         }
 
         .guest-login {
             margin-top: 20px;
-            text-align: center;
         }
 
         .guest-button {
             display: inline-block;
-            padding: 10px 20px;
-            background-color: #28a745;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #50c878, #3da85b);
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 16px;
             font-weight: bold;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .guest-button:hover {
-            background-color: #218838;
+            background: linear-gradient(135deg, #3da85b, #50c878);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
     </style>
 </body>
