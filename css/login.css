@@ -9,11 +9,11 @@ body, html {
     height: 100%;
     width: 100%;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #f9f9f9, #ececec);
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    background: linear-gradient(135deg, #f9f9f9, #ececec);
+    position: relative;
 }
 
 /* Fondo de la Página */
@@ -27,21 +27,9 @@ body, html {
     z-index: -1;
 }
 
-/* Logo Superior */
-.logo-container {
-    position: relative;
-    top: -20px;
-    margin-bottom: 1rem;
-    width: 100px;
-    height: 100px;
-    background: url('../img/logo.png') no-repeat center center/contain;
-    animation: fadeIn 1s ease-out;
-    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.2));
-}
-
 /* Contenedor Principal */
 .login-container {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     padding: 2rem;
     border-radius: 15px;
@@ -157,18 +145,6 @@ h1 {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Animaciones */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
 /* Responsividad */
 @media (max-width: 768px) {
     .login-container {
@@ -178,10 +154,5 @@ h1 {
 
     .btn-login, .btn-guest {
         font-size: 14px;
-    }
-
-    .logo-container {
-        width: 80px;
-        height: 80px;
     }
 }
