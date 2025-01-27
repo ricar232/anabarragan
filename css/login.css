@@ -37,7 +37,7 @@ body, html {
     animation: fadeIn 1s ease-out; /* Animación suave */
     filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.2));
     border-radius: 50%; /* Si deseas que el logo tenga un estilo circular */
-    border: 3px solid rgba(255, 255, 255, 0.9); /* Borde blanco elegante */
+    border: 3px solid rgba(0, 0, 0, 0.596); /* Borde blanco elegante */
 }
 
 /* Animación Suave */
