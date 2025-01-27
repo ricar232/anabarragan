@@ -20,7 +20,7 @@ body::before {
     position: fixed;
     width: 100px;
     height: 100px;
-    background: url('../img/logo-compania.jpg') no-repeat center center/contain;
+    background: url('../img/logo.png') no-repeat center center/contain;
     z-index: 1000;
     top: 30px;
     left: 50%;
