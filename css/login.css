@@ -1,4 +1,4 @@
-/* styles.css - Versión Mejorada con Diseño Compacto y Botones Modernos */
+/* styles.css - Versión Final con Centrado y Botón Invitado Mejorado */
 * {
     margin: 0;
     padding: 0;
@@ -10,8 +10,10 @@ body, html {
     width: 100%;
     font-family: 'Poppins', sans-serif;
     background: url('../img/background01.jpg') no-repeat center center/cover;
-    overflow: auto;
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 /* Logo Superior Fijo */
@@ -22,7 +24,7 @@ body::before {
     height: 90px;
     background: url('../img/logo.png') no-repeat center center/contain;
     z-index: 1000;
-    top: 20px;
+    top: 5%;
     left: 50%;
     transform: translateX(-50%);
     filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.2));
@@ -39,11 +41,12 @@ body::before {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     width: 90%;
     max-width: 350px;
-    margin: 120px auto 0;
+    margin: auto;
     position: relative;
     z-index: 1;
     animation: contenedorEntrada 0.7s ease-out 0.2s both;
     border: 1.5px solid rgba(255, 255, 255, 0.2);
+    transform: translateY(-10%);
 }
 
 /* Campos de Entrada */
@@ -113,18 +116,19 @@ input:focus {
     color: white;
     font-size: 0.9rem;
     font-weight: 600;
-    background: linear-gradient(135deg, #50c878, #3da85b);
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
     padding: 0.8rem 1.5rem;
-    border-radius: 12px;
+    border-radius: 15px;
     display: inline-block;
     transition: all 0.4s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .guest-link a:hover {
-    background: linear-gradient(135deg, #3da85b, #2c8746);
+    background: linear-gradient(135deg, #feb47b, #ff7e5f);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-    transform: scale(1.05);
+    transform: scale(1.1) rotate(1deg);
 }
 
 /* Animaciones */
@@ -142,7 +146,7 @@ input:focus {
 @keyframes contenedorEntrada {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(50px);
     }
     to {
         opacity: 1;
@@ -155,11 +159,11 @@ input:focus {
     body::before {
         width: 80px;
         height: 80px;
-        top: 20px;
+        top: 5%;
     }
     
     .login-container {
-        margin-top: 100px;
+        transform: translateY(-5%);
         padding: 1.8rem;
         max-width: 300px;
     }
@@ -173,11 +177,10 @@ input:focus {
     body::before {
         width: 70px;
         height: 70px;
-        top: 15px;
+        top: 5%;
     }
     
     .login-container {
-        margin-top: 90px;
         padding: 1.5rem;
         border-radius: 12px;
     }
