@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="css/login.css"> <!-- Ruta a tu archivo CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Iconos -->
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <!-- Fondo -->
     <div class="background"></div>
+
+    <!-- Contenedor Principal -->
     <div class="login-container">
+        <div class="logo-container"></div>
         <h1><i class="fas fa-user-circle"></i> Iniciar Sesión</h1>
 
         <!-- Mensajes de error -->
@@ -17,7 +21,7 @@
             <p class="error-message"><i class="fas fa-exclamation-triangle"></i> Usuario o contraseña incorrectos.</p>
         <?php endif; ?>
 
-        <!-- Formulario de inicio de sesión -->
+        <!-- Formulario -->
         <form action="validar_login.php" method="POST">
             <div class="input-container">
                 <label for="usuario"><i class="fas fa-user"></i> Usuario</label>
@@ -30,7 +34,7 @@
             <button type="submit" class="btn-login"><i class="fas fa-sign-in-alt"></i> Ingresar</button>
         </form>
 
-        <!-- Botón para invitados -->
+        <!-- Invitados -->
         <div class="guest-container">
             <p>¿Eres un invitado?</p>
             <form action="pagina_invitado.php" method="POST">
