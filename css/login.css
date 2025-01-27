@@ -24,7 +24,7 @@ body::before {
     width: 80px;
     height: 80px;
     background: url('../img/logo.png') no-repeat center center/contain;
-    top: 5%;
+    top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
     filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.2));
