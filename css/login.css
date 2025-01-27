@@ -1,4 +1,4 @@
-/* styles.css - Versión Mejorada con Efectos Modernos */
+/* styles.css - Versión Mejorada con Imagen de Fondo */
 * {
     margin: 0;
     padding: 0;
@@ -9,7 +9,7 @@ body, html {
     height: 100%;
     width: 100%;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef) no-repeat center center fixed;
+    background: url('../img/background01.jpg') no-repeat center center/cover;
     overflow: auto;
     position: relative;
 }
