@@ -1,4 +1,4 @@
-/* styles.css - Versión Final con Centrado y Botón Invitado Mejorado */
+/* styles.css - Versión Centrada y Botón Invitado Mejorado */
 * {
     margin: 0;
     padding: 0;
@@ -13,23 +13,20 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
 }
 
-/* Logo Superior Fijo */
+/* Logo Superior */
 body::before {
     content: '';
-    position: fixed;
-    width: 90px;
-    height: 90px;
+    position: absolute;
+    width: 80px;
+    height: 80px;
     background: url('../img/logo.png') no-repeat center center/contain;
-    z-index: 1000;
     top: 5%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.2));
     animation: logoEntrada 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-    transition: all 0.3s ease-in-out;
 }
 
 /* Contenedor Principal */
@@ -41,12 +38,9 @@ body::before {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     width: 90%;
     max-width: 350px;
-    margin: auto;
     position: relative;
-    z-index: 1;
-    animation: contenedorEntrada 0.7s ease-out 0.2s both;
+    animation: contenedorEntrada 0.7s ease-out;
     border: 1.5px solid rgba(255, 255, 255, 0.2);
-    transform: translateY(-10%);
 }
 
 /* Campos de Entrada */
@@ -73,7 +67,6 @@ input {
     color: rgba(0, 0, 0, 0.85);
     font-size: 0.95rem;
     transition: all 0.4s ease;
-    backdrop-filter: blur(5px);
 }
 
 input:focus {
@@ -81,10 +74,9 @@ input:focus {
     border-color: #4a90e2;
     background: rgba(255, 255, 255, 0.35);
     box-shadow: 0 0 15px rgba(74, 144, 226, 0.25);
-    transform: scale(1.02);
 }
 
-/* Botones */
+/* Botón de Inicio de Sesión */
 .btn-login {
     width: 100%;
     padding: 1rem;
@@ -95,9 +87,7 @@ input:focus {
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.4s ease;
-    margin-top: 1.5rem;
     font-weight: 600;
-    letter-spacing: 0.5px;
 }
 
 .btn-login:hover {
@@ -105,7 +95,7 @@ input:focus {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-/* Botón Invitado */
+/* Botón Invitado Mejorado */
 .guest-link {
     text-align: center;
     margin-top: 1.5rem;
@@ -113,32 +103,31 @@ input:focus {
 
 .guest-link a {
     text-decoration: none;
-    color: white;
     font-size: 0.9rem;
     font-weight: 600;
-    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    color: white;
     padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
     border-radius: 15px;
-    display: inline-block;
-    transition: all 0.4s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    transition: all 0.3s ease;
 }
 
 .guest-link a:hover {
     background: linear-gradient(135deg, #feb47b, #ff7e5f);
+    transform: translateY(-2px) scale(1.1);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-    transform: scale(1.1) rotate(1deg);
 }
 
 /* Animaciones */
 @keyframes logoEntrada {
     from {
-        transform: translate(-50%, -50px) scale(0.8);
+        transform: translate(-50%, -30px);
         opacity: 0;
     }
     to {
-        transform: translate(-50%, 0) scale(1);
+        transform: translate(-50%, 0);
         opacity: 1;
     }
 }
@@ -154,44 +143,20 @@ input:focus {
     }
 }
 
-/* Responsive Design */
+/* Responsividad */
 @media (max-width: 768px) {
-    body::before {
-        width: 80px;
-        height: 80px;
-        top: 5%;
-    }
-    
-    .login-container {
-        transform: translateY(-5%);
-        padding: 1.8rem;
-        max-width: 300px;
-    }
-    
-    input {
-        padding: 0.8rem 1rem;
-    }
-}
-
-@media (max-width: 480px) {
     body::before {
         width: 70px;
         height: 70px;
         top: 5%;
     }
-    
+
     .login-container {
         padding: 1.5rem;
-        border-radius: 12px;
+        max-width: 300px;
     }
-    
-    .btn-login {
-        padding: 0.9rem;
-        font-size: 0.9rem;
-    }
-    
+
     input {
-        padding: 0.7rem 0.9rem;
-        font-size: 0.9rem;
+        padding: 0.8rem 1rem;
     }
 }
