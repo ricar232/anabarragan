@@ -8,6 +8,9 @@
 </head>
 <body>
     <div class="login-container">
+        <!-- Logo -->
+        <div class="logo-container"></div>
+
         <h1>Iniciar Sesión</h1>
 
         <!-- Mostrar mensaje de error si existe -->
