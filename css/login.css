@@ -32,13 +32,13 @@ body, html {
 .logo-container {
     width: 100px;
     height: 100px;
-    background: url('../img/logo.png') no-repeat center center/contain;
+    background: url('../img/logo.png') no-repeat center center/contain, #f4f4f4;
     margin: 0 auto 1rem;
     animation: fadeIn 1s ease-out;
     filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.2));
 }
 
-/* Título0 */
+/* Título */
 h1 {
     font-size: 24px;
     margin-bottom: 1.5rem;
