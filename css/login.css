@@ -30,13 +30,38 @@ body, html {
 
 /* Contenedor del Logo */
 .logo-container {
-    width: 100px;
-    height: 100px;
-    background: url('../img/logo.png') no-repeat center center/contain, #f4f4f4;
-    margin: 0 auto 1rem;
-    animation: fadeIn 1s ease-out;
+    width: 120px; /* Ajusta el tamaño del logo */
+    height: 120px;
+    background: url('../img/logo.png') no-repeat center center/contain;
+    margin: 0 auto 1rem; /* Centrado automático con margen inferior */
+    animation: fadeIn 1s ease-out; /* Animación suave */
     filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.2));
+    border-radius: 50%; /* Si deseas que el logo tenga un estilo circular */
+    border: 3px solid rgba(255, 255, 255, 0.9); /* Borde blanco elegante */
 }
+
+/* Animación Suave */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Centrar la caja del login */
+.login-container {
+    margin-top: 50px; /* Ajusta para centrar mejor */
+    background: rgba(255, 255, 255, 0.95); /* Fondo un poco más opaco */
+    padding: 2.5rem;
+    border-radius: 20px; /* Más redondeado */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
 
 /* Título */
 h1 {
